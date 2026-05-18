@@ -1,35 +1,56 @@
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager';
 
-export interface DatabaseCredentials {
-  username: string;
-  password: string;
-  host: string;
-  port: number;
-  dbname: string;
-}
-
+// AWS SDK v3 honours AWS_ENDPOINT_URL automatically, so LocalStack works
+// without further wiring.
 const secretsManager = new SecretsManagerClient({});
-export const secretCache = new Map<string, string>();
 
-export const fetchSecretByArn = async (secretArn: string): Promise<string> => {
-  const cached = secretCache.get(secretArn);
+// ARN → in-flight or resolved promise. Multiple call sites within one lambda
+// invocation coalesce to a single GetSecretValue request. Failures evict so
+// retries actually re-fetch.
+const cache = new Map<string, Promise<string>>();
+
+const fetchRaw = (arn: string): Promise<string> => {
+  const cached = cache.get(arn);
   if (cached) return cached;
 
-  // In dev, the "ARN" env var is treated as the literal value.
-  if (process.env.NODE_ENV === 'development') return secretArn;
+  const promise = (async () => {
+    const result = await secretsManager.send(new GetSecretValueCommand({ SecretId: arn }));
+    if (!result.SecretString) {
+      throw new Error(`Secret ${arn} has no SecretString`);
+    }
+    return result.SecretString;
+  })();
 
-  const secret = await secretsManager.send(new GetSecretValueCommand({ SecretId: secretArn }));
-  if (!secret.SecretString) throw new Error(`Secret ${secretArn} has no SecretString`);
-  secretCache.set(secretArn, secret.SecretString);
-  return secret.SecretString;
+  promise.catch(() => cache.delete(arn));
+  cache.set(arn, promise);
+  return promise;
 };
 
-export const getDatabaseCredentialsByArn = async (secretArn: string): Promise<DatabaseCredentials> => {
-  const secret = await fetchSecretByArn(secretArn);
-  return JSON.parse(secret) as DatabaseCredentials;
-};
+/**
+ * Plain-string secret. Returns `devFallback` when `arn` is empty or undefined,
+ * never hitting AWS in dev mode.
+ */
+export async function fetchStringSecretByArn(
+  arn: string | undefined,
+  devFallback: string,
+): Promise<string> {
+  if (!arn) return devFallback;
+  return fetchRaw(arn);
+}
 
-export const buildDatabaseUrl = (creds: DatabaseCredentials, proxyEndpoint?: string): string => {
-  const host = proxyEndpoint || creds.host;
-  return `postgresql://${creds.username}:${creds.password}@${host}:${creds.port}/${creds.dbname}?sslmode=no-verify&schema=public`;
-};
+/**
+ * JSON secret. Fetches, `JSON.parse`s, and casts to `T`. Pass the expected shape
+ * as the generic so the call site is typed.
+ */
+export async function fetchJsonSecretByArn<T>(
+  arn: string | undefined,
+  devFallback: T,
+): Promise<T> {
+  if (!arn) return devFallback;
+  const raw = await fetchRaw(arn);
+  try {
+    return JSON.parse(raw) as T;
+  } catch (err) {
+    throw new Error(`Secret ${arn} is not valid JSON: ${(err as Error).message}`);
+  }
+}

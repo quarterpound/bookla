@@ -7,6 +7,6 @@ export default defineConfig({
     alias: {},
   },
   server: {
-    port: 5173,
+    port: 5174,
   },
 });

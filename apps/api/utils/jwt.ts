@@ -1,6 +1,6 @@
 import { sign, verify } from 'hono/jwt';
 import { env } from '../env';
-import { fetchSecretByArn } from '@bookla/utils';
+import { fetchStringSecretByArn } from '@bookla/utils';
 
 export interface JwtPayload {
   userId: number;
@@ -13,20 +13,27 @@ export interface JwtPayload {
 const TOKEN_TTL_SECONDS = 60 * 60 * 24 * 7;
 const JWT_ALG = 'HS256' as const;
 
-let cachedSecret: string | null = null;
+// Canonical secret-consumer pattern: a module-scoped lazy promise. Initialised
+// on the first sign/verify, then reused for the lifetime of the warm container.
+// Do NOT await at top level — endpoints that don't need JWT shouldn't pay the
+// Secrets Manager round-trip on cold start.
+let secretPromise: Promise<string> | null = null;
 
-const getJwtSecret = async (): Promise<string> => {
-  if (cachedSecret) return cachedSecret;
-  let secret: string;
-  if (env.JWT_SECRET_ARN) {
-    secret = await fetchSecretByArn(env.JWT_SECRET_ARN);
-  } else if (env.JWT_SECRET) {
-    secret = env.JWT_SECRET;
-  } else {
-    throw new Error('JWT secret not configured');
+const getJwtSecret = (): Promise<string> => {
+  if (!secretPromise) {
+    secretPromise = (async () => {
+      const secret = await fetchStringSecretByArn(env.JWT_SECRET_ARN, env.JWT_SECRET ?? '');
+      if (!secret) {
+        throw new Error('JWT secret resolved to empty — set JWT_SECRET (dev) or JWT_SECRET_ARN (prod)');
+      }
+      return secret;
+    })();
+    // Evict on failure so the next caller re-fetches instead of caching the rejection.
+    secretPromise.catch(() => {
+      secretPromise = null;
+    });
   }
-  cachedSecret = secret;
-  return secret;
+  return secretPromise;
 };
 
 export const signToken = async (payload: Omit<JwtPayload, 'exp' | 'iat'>): Promise<string> => {

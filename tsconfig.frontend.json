@@ -1,0 +1,35 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "useDefineForClassFields": true,
+    "noUncheckedIndexedAccess": false,
+    "paths": {
+      "@api/*": ["./apps/api/*"],
+      "@dto/*": ["./packages/dto/*"],
+      "@db/*": ["./packages/db/*"],
+      "@utils/*": ["./packages/utils/*"]
+    }
+  },
+  "include": [
+    "./packages/**/*.ts",
+    "./packages/**/*.tsx",
+    "./apps/api/types/**/*.ts",
+    "./apps/dashboard/src/**/*.ts",
+    "./apps/dashboard/src/**/*.tsx",
+    "./apps/admin/src/**/*.ts",
+    "./apps/admin/src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/dist",
+    "./packages/client/**"
+  ]
+}
