@@ -1,0 +1,30 @@
+model Tenant {
+  id        Int           @id @default(autoincrement())
+  name      String
+  slug      String        @unique
+  status    TenantStatus  @default(active)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+
+  users     TenantUser[]
+}
+
+model TenantUser {
+  id           Int          @id @default(autoincrement())
+  tenantId     Int
+  tenant       Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  email        String
+  passwordHash String
+  name         String?
+
+  role         UserRole     @default(member)
+  subRole      UserSubRole  @default(staff)
+
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  lastLoginAt  DateTime?
+
+  @@unique([tenantId, email])
+  @@index([email])
+}

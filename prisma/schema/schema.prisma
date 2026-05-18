@@ -1,0 +1,11 @@
+// Bookla — main Prisma configuration.
+// Domain models live in sibling .prisma files in this directory.
+// The connection URL lives in /prisma.config.ts (Prisma 7+).
+
+generator client {
+  provider        = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}

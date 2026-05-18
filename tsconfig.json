@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "strict": true,
+    "strictNullChecks": true,
+    "noUncheckedIndexedAccess": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@api/*": ["./apps/api/*"],
+      "@dto/*": ["./packages/dto/*"],
+      "@db/*": ["./packages/db/*"],
+      "@utils/*": ["./packages/utils/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist", "**/dist"]
+}

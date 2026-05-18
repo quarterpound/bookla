@@ -1,0 +1,19 @@
+{
+  "name": "@bookla/db",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf .turbo"
+  },
+  "dependencies": {
+    "@bookla/utils": "workspace:*",
+    "@prisma/adapter-pg": "^7.0.0",
+    "@prisma/client": "^7.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

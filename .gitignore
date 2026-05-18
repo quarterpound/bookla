@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.env.local
+cdk.out
+.DS_Store
+*.pem
+*.log
+.turbo

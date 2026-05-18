@@ -1,0 +1,15 @@
+enum UserRole {
+  owner
+  member
+}
+
+enum UserSubRole {
+  admin
+  manager
+  staff
+}
+
+enum TenantStatus {
+  active
+  suspended
+}
