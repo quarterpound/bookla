@@ -1,0 +1,24 @@
+model Staff {
+  id        Int      @id @default(autoincrement())
+  tenantId  Int      @map("tenant_id")
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  userId    Int?        @map("user_id")
+  user      TenantUser? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  name      String
+  phone     String?
+  avatarUrl String?  @map("avatar_url")
+  isActive  Boolean  @default(true) @map("is_active")
+  sortOrder Int      @default(0)    @map("sort_order")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  workingHours WorkingHours[]
+  daysOff      DayOff[]
+  bookings     Booking[]
+
+  @@index([tenantId, isActive])
+  @@map("staff")
+}

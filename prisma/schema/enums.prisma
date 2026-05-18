@@ -1,15 +1,61 @@
 enum UserRole {
   owner
   member
+
+  @@map("user_role")
 }
 
 enum UserSubRole {
   admin
   manager
   staff
+
+  @@map("user_sub_role")
 }
 
 enum TenantStatus {
   active
   suspended
+
+  @@map("tenant_status")
+}
+
+enum BusinessPlan {
+  personal
+  business
+
+  @@map("business_plan")
+}
+
+enum BookingStatus {
+  confirmed
+  cancelled
+  completed
+  no_show
+
+  @@map("booking_status")
+}
+
+enum BookingSource {
+  online
+  manual
+
+  @@map("booking_source")
+}
+
+enum NotificationType {
+  confirmation
+  reminder_24h
+  reminder_1h
+  cancellation
+
+  @@map("notification_type")
+}
+
+enum NotificationStatus {
+  pending
+  sent
+  failed
+
+  @@map("notification_status")
 }

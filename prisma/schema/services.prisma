@@ -1,0 +1,20 @@
+model Service {
+  id              Int      @id @default(autoincrement())
+  tenantId        Int      @map("tenant_id")
+  tenant          Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  name            String
+  durationMinutes Int      @map("duration_minutes")
+  priceAmount     Int      @map("price_amount")
+  currency        String   @default("AZN")
+  isActive        Boolean  @default(true) @map("is_active")
+  sortOrder       Int      @default(0)    @map("sort_order")
+
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt      @map("updated_at")
+
+  bookings Booking[]
+
+  @@index([tenantId, isActive])
+  @@map("services")
+}

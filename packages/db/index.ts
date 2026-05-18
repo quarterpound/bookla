@@ -71,4 +71,23 @@ function getClient(adapter: PrismaPg) {
   return new PrismaClient({ adapter });
 }
 
-export type { Tenant, TenantUser, UserRole, UserSubRole } from '@prisma/client';
+export type {
+  Tenant,
+  TenantUser,
+  Staff,
+  Service,
+  WorkingHours,
+  DayOff,
+  Booking,
+  Client,
+  Notification,
+  OtpChallenge,
+  UserRole,
+  UserSubRole,
+  TenantStatus,
+  BusinessPlan,
+  BookingStatus,
+  BookingSource,
+  NotificationType,
+  NotificationStatus,
+} from '@prisma/client';

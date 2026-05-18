@@ -1,30 +1,44 @@
 model Tenant {
-  id        Int           @id @default(autoincrement())
-  name      String
-  slug      String        @unique
-  status    TenantStatus  @default(active)
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
+  id          Int           @id @default(autoincrement())
+  name        String
+  slug        String        @unique
+  description String?
+  address     String?
+  phone       String?
+  avatarUrl   String?       @map("avatar_url")
+  plan        BusinessPlan  @default(personal)
+  timezone    String        @default("Asia/Baku")
+  status      TenantStatus  @default(active)
+  createdAt   DateTime      @default(now()) @map("created_at")
+  updatedAt   DateTime      @updatedAt      @map("updated_at")
 
-  users     TenantUser[]
+  users    TenantUser[]
+  staff    Staff[]
+  services Service[]
+  clients  Client[]
+  bookings Booking[]
+
+  @@map("tenants")
 }
 
 model TenantUser {
   id           Int          @id @default(autoincrement())
-  tenantId     Int
+  tenantId     Int          @map("tenant_id")
   tenant       Tenant       @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
-  email        String
-  passwordHash String
+  phone        String       @unique
   name         String?
+  avatarUrl    String?      @map("avatar_url")
 
   role         UserRole     @default(member)
-  subRole      UserSubRole  @default(staff)
+  subRole      UserSubRole  @default(staff) @map("sub_role")
 
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  lastLoginAt  DateTime?
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt      @map("updated_at")
+  lastLoginAt  DateTime?    @map("last_login_at")
 
-  @@unique([tenantId, email])
-  @@index([email])
+  staffProfiles Staff[]
+
+  @@index([phone])
+  @@map("tenant_users")
 }

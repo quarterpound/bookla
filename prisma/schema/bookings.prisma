@@ -1,0 +1,52 @@
+model Booking {
+  id        Int           @id @default(autoincrement())
+  publicId  String        @unique @default(uuid()) @map("public_id")
+
+  tenantId  Int           @map("tenant_id")
+  tenant    Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  staffId   Int           @map("staff_id")
+  staff     Staff         @relation(fields: [staffId], references: [id])
+
+  serviceId Int           @map("service_id")
+  service   Service       @relation(fields: [serviceId], references: [id])
+
+  clientId  Int           @map("client_id")
+  client    Client        @relation(fields: [clientId], references: [id])
+
+  date      DateTime      @db.Date
+  startTime String        @map("start_time")
+  endTime   String        @map("end_time")
+
+  status    BookingStatus @default(confirmed)
+  source    BookingSource
+  notes     String?
+
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt      @map("updated_at")
+
+  notifications Notification[]
+
+  @@index([tenantId, date])
+  @@index([staffId, date, status])
+  @@map("bookings")
+}
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  tenantId  Int      @map("tenant_id")
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  name      String
+  phone     String
+  notes     String?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt      @map("updated_at")
+
+  bookings Booking[]
+
+  @@unique([tenantId, phone])
+  @@index([tenantId])
+  @@map("clients")
+}
