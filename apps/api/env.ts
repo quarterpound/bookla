@@ -1,8 +1,13 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 import dotenv from 'dotenv';
 
 if (process.env.NODE_ENV !== 'production') {
-  dotenv.config();
+  // Resolve `.env` relative to this file so it works regardless of cwd —
+  // turbo spawns dev scripts from each app's directory, not the repo root.
+  const here = path.dirname(fileURLToPath(import.meta.url));
+  dotenv.config({ path: path.resolve(here, '../../.env') });
 }
 
 const envSchema = z
@@ -27,6 +32,10 @@ const envSchema = z
 
     // Cookie domain — leave unset for localhost.
     COOKIE_DOMAIN: z.string().optional(),
+
+    // SMS provider key. `console` logs the OTP to stdout (dev/default). Other
+    // values are reserved for real providers (e.g. Twilio, an AZ aggregator).
+    SMS_PROVIDER: z.string().default('console'),
   })
   .refine(
     (env) => {

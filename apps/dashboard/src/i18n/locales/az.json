@@ -1,0 +1,207 @@
+{
+  "common": {
+    "appName": "Bookla",
+    "loading": "Yüklənir…",
+    "submit": "Təsdiqlə",
+    "cancel": "İmtina",
+    "back": "Geri",
+    "signOut": "Çıxış"
+  },
+  "shell": {
+    "tabBarLabel": "Əsas naviqasiya",
+    "localeSwitcherLabel": "Dil seçimi",
+    "tabs": {
+      "calendar": "Təqvim",
+      "bookings": "Rezervlər",
+      "clients": "Müştərilər",
+      "settings": "Ayarlar"
+    }
+  },
+  "auth": {
+    "signInTitle": "Daxil ol",
+    "signInSubtitle": "Telefon nömrənizə kod göndərəcəyik.",
+    "phoneLabel": "Telefon nömrəsi",
+    "phonePlaceholder": "+994501234567",
+    "sendCode": "Kod göndər",
+    "sending": "Göndərilir…",
+    "codeTitle": "Kodu daxil edin",
+    "sentTo": "{{phone}} nömrəsinə göndərildi",
+    "codeLabel": "6 rəqəmli kod",
+    "verify": "Təsdiqlə",
+    "verifying": "Yoxlanılır…",
+    "changePhone": "Telefonu dəyiş",
+    "errors": {
+      "sendFailed": "Kod göndərilmədi",
+      "invalidCode": "Yanlış kod"
+    }
+  },
+  "calendar": {
+    "addBooking": "Rezerv əlavə et",
+    "emptyTitle": "Bu gün üçün rezerv yoxdur",
+    "emptyDescription": "Yeni rezerv əlavə etmək üçün aşağıdakı düyməyə toxunun."
+  },
+  "bookings": {
+    "emptyTitle": "Hələ rezerv yoxdur",
+    "emptyDescription": "Müştərilərin etdiyi rezervlər burada görünəcək."
+  },
+  "clients": {
+    "emptyTitle": "Hələ müştəri yoxdur",
+    "emptyDescription": "İlk rezerv olduqda müştəri avtomatik əlavə olunacaq."
+  },
+  "settings": {
+    "signedInAs": "Hesab",
+    "businessLine": "Biznes: {{name}} ({{slug}})",
+    "language": "Dil",
+    "rows": {
+      "services": {
+        "label": "Xidmətlər",
+        "hint": "Müştəri rezerv etdiyi xidmətləri idarə edin"
+      },
+      "schedule": {
+        "label": "İş cədvəli",
+        "hint": "Həftəlik iş saatlarınızı tənzimləyin"
+      },
+      "daysOff": {
+        "label": "İş günü olmayan günlər",
+        "hint": "Bağlı olduğunuz günləri əlavə edin"
+      }
+    }
+  },
+  "services": {
+    "title": "Xidmətlər",
+    "newTitle": "Yeni xidmət",
+    "editTitle": "Xidməti düzəlt",
+    "addAction": "Yeni xidmət",
+    "addFirst": "İlk xidməti əlavə et",
+    "save": "Yadda saxla",
+    "saving": "Yadda saxlanılır…",
+    "deactivate": "Xidməti deaktiv et",
+    "deactivating": "Deaktiv edilir…",
+    "emptyTitle": "Hələ xidmət yoxdur",
+    "emptyDescription": "Müştərilərin rezerv edə biləcəyi ən azı bir xidmət əlavə edin.",
+    "fields": {
+      "name": "Ad",
+      "namePlaceholder": "məs. Saç düzümü",
+      "duration": "Müddət",
+      "durationHint": "dəqiqə",
+      "price": "Qiymət",
+      "priceHint": "AZN"
+    },
+    "row": {
+      "duration": "{{minutes}} dəq",
+      "inactive": "Deaktiv"
+    },
+    "activeToggle": {
+      "label": "Aktiv",
+      "hint": "Deaktiv edilərsə, yeni rezervlərdə görünməyəcək."
+    },
+    "errors": {
+      "loadFailed": "Xidmətləri yükləmək alınmadı.",
+      "saveFailed": "Yadda saxlamaq alınmadı. Yenidən cəhd edin."
+    }
+  },
+  "schedule": {
+    "title": "İş cədvəli",
+    "save": "Yadda saxla",
+    "saving": "Yadda saxlanılır…",
+    "addInterval": "+ Vaxt aralığı əlavə et",
+    "removeInterval": "Sil",
+    "copy": {
+      "openLabel": "Digər günlərə köçür",
+      "title": "{{day}} cədvəlini köçür",
+      "weekdays": "İş günləri",
+      "weekends": "Həftəsonu",
+      "allDays": "Bütün günlər",
+      "apply_zero": "Gün seçin",
+      "apply_one": "1 günə tətbiq et",
+      "apply_other": "{{count}} günə tətbiq et"
+    },
+    "fields": {
+      "start": "Başlama",
+      "end": "Bağlama"
+    },
+    "days": {
+      "mon": "Bazar ertəsi",
+      "tue": "Çərşənbə axşamı",
+      "wed": "Çərşənbə",
+      "thu": "Cümə axşamı",
+      "fri": "Cümə",
+      "sat": "Şənbə",
+      "sun": "Bazar"
+    },
+    "errors": {
+      "loadFailed": "Cədvəli yükləmək alınmadı.",
+      "saveFailed": "Yadda saxlamaq alınmadı.",
+      "invalid": "Bəzi vaxt aralıqları üst-üstə düşür və ya bitiş başlanğıcdan əvvəldir."
+    },
+    "daysOff": {
+      "title": "İş günü olmayan günlər",
+      "addAction": "Yeni gün",
+      "addTitle": "Yeni qeyri-iş günü",
+      "confirm": "Əlavə et",
+      "remove": "Sil",
+      "dateLabel": "Tarix",
+      "reasonLabel": "Səbəb (istəyə görə)",
+      "reasonPlaceholder": "məs. Tətil",
+      "emptyTitle": "Planlaşdırılmış gün yoxdur",
+      "emptyDescription": "Aşağıdakı düymə ilə qeyri-iş gününüzü əlavə edin."
+    }
+  },
+  "newBooking": {
+    "title": "Yeni rezerv",
+    "comingSoonTitle": "Tezliklə",
+    "comingSoonDescription": "Manuel rezerv əlavə etmək formu növbəti yeniləmədə hazır olacaq."
+  },
+  "onboarding": {
+    "title": "Quraşdırma",
+    "next": "Davam et",
+    "finish": "Bitir",
+    "submitting": "Yadda saxlanılır…",
+    "errors": {
+      "submit": "Quraşdırma uğursuz oldu. Yenidən cəhd edin."
+    },
+    "business": {
+      "title": "Biznesinizi adlandırın",
+      "subtitle": "Bu ad müştərilərə bron səhifəsində görünəcək.",
+      "label": "Biznesin adı",
+      "placeholder": "məs. Tural's Barbershop"
+    },
+    "slug": {
+      "title": "Bron linkini seçin",
+      "subtitle": "Müştərilərə paylaşacağınız ünvanın sonundakı hissə.",
+      "label": "URL hissəsi",
+      "placeholder": "turals-barbershop",
+      "hint": "Yalnız kiçik hərflər, rəqəmlər və tire (3–50 simvol).",
+      "useSuggestion": "“{{suggestion}}” istifadə et",
+      "errors": {
+        "taken": "Bu link artıq tutulub. Başqasını seçin."
+      }
+    },
+    "service": {
+      "title": "İlk xidmətinizi əlavə edin",
+      "subtitle": "Daha sonra istənilən qədər əlavə edə bilərsiniz.",
+      "nameLabel": "Xidmət adı",
+      "namePlaceholder": "məs. Saç düzümü",
+      "durationLabel": "Müddət",
+      "durationHint": "dəqiqə",
+      "priceLabel": "Qiymət",
+      "priceHint": "AZN"
+    },
+    "hours": {
+      "title": "İş saatlarınız",
+      "subtitle": "Sonra bunları “Cədvəl” bölməsində dəyişmək olar.",
+      "daysLabel": "Açıq olan günlər",
+      "openLabel": "Başlama",
+      "closeLabel": "Bağlama",
+      "days": {
+        "mon": "B.e",
+        "tue": "Ç.a",
+        "wed": "Ç",
+        "thu": "C.a",
+        "fri": "C",
+        "sat": "Ş",
+        "sun": "B"
+      }
+    }
+  }
+}

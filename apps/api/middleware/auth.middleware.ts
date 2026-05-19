@@ -10,7 +10,7 @@ export interface AuthUser {
   tenantId: number;
   role: UserRole;
   subRole: UserSubRole;
-  email: string;
+  phone: string;
 }
 
 declare module 'hono' {
@@ -21,8 +21,19 @@ declare module 'hono' {
 
 export const AUTH_COOKIE = 'token';
 
+const extractBearer = (c: Context): string | null => {
+  const header = c.req.header('Authorization') ?? c.req.header('authorization');
+  if (!header) return null;
+  const [scheme, value] = header.split(' ', 2);
+  if (!scheme || !value) return null;
+  if (scheme.toLowerCase() !== 'bearer') return null;
+  return value.trim() || null;
+};
+
 export const authMiddleware = async (c: Context, next: Next) => {
-  const token = getCookie(c, AUTH_COOKIE);
+  // Bearer takes precedence so a native client never accidentally falls back
+  // to a stale browser cookie when both happen to be present.
+  const token = extractBearer(c) ?? getCookie(c, AUTH_COOKIE);
   if (!token) throw new HTTPException(401, { message: 'Authentication token missing' });
 
   let payload;
@@ -35,7 +46,7 @@ export const authMiddleware = async (c: Context, next: Next) => {
   const db = await getPrismaClient();
   const user = await db.tenantUser.findUnique({
     where: { id: payload.userId },
-    select: { id: true, tenantId: true, role: true, subRole: true, email: true },
+    select: { id: true, tenantId: true, role: true, subRole: true, phone: true },
   });
   if (!user) throw new HTTPException(401, { message: 'User not found' });
 
@@ -49,7 +60,7 @@ export const authMiddleware = async (c: Context, next: Next) => {
     tenantId: user.tenantId,
     role: user.role,
     subRole: user.subRole,
-    email: user.email,
+    phone: user.phone,
   });
   await next();
 };

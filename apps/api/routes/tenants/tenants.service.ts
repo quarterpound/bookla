@@ -22,7 +22,7 @@ export const listMembers = async (user: AuthUser) => {
     where: { tenantId: user.tenantId },
     select: {
       id: true,
-      email: true,
+      phone: true,
       name: true,
       role: true,
       subRole: true,

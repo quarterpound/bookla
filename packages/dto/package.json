@@ -2,11 +2,14 @@
   "name": "@bookla/dto",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "main": "index.ts",
   "types": "index.ts",
   "exports": {
     ".": "./index.ts",
     "./auth": "./auth.ts",
+    "./schedule": "./schedule.ts",
+    "./services": "./services.ts",
     "./utils": "./utils.ts"
   },
   "scripts": {

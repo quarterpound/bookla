@@ -1,15 +1,16 @@
 import { Hono } from 'hono';
+import type { Context } from 'hono';
 import { zValidator } from '@hono/zod-validator';
 import { setCookie, deleteCookie } from 'hono/cookie';
-import { loginDto, registerDto } from '@bookla/dto/auth';
+import { onboardingDto, sendOtpDto, verifyOtpDto } from '@bookla/dto/auth';
 import { AUTH_COOKIE, authMiddleware } from '../../middleware/auth.middleware';
 import { tokenTtlSeconds } from '../../utils/jwt';
 import { env } from '../../env';
-import { getMe, login, registerTenant } from './auth.service';
+import { completeOnboarding, getMe, sendOtp, verifyOtp } from './auth.service';
 
 const isProd = env.NODE_ENV === 'production';
 
-const setAuthCookie = (c: Parameters<typeof setCookie>[0], token: string) => {
+const setAuthCookie = (c: Context, token: string) => {
   setCookie(c, AUTH_COOKIE, token, {
     httpOnly: true,
     secure: isProd,
@@ -21,16 +22,23 @@ const setAuthCookie = (c: Parameters<typeof setCookie>[0], token: string) => {
 };
 
 export const authController = new Hono()
-  .post('/register', zValidator('json', registerDto), async (c) => {
-    const result = await registerTenant(c.req.valid('json'));
-    setAuthCookie(c, result.token);
-    return c.json({ user: result.user, tenant: result.tenant });
+  .post('/send-otp', zValidator('json', sendOtpDto), async (c) => {
+    const result = await sendOtp(c.req.valid('json'));
+    return c.json(result);
   })
 
-  .post('/login', zValidator('json', loginDto), async (c) => {
-    const result = await login(c.req.valid('json'));
+  .post('/verify-otp', zValidator('json', verifyOtpDto), async (c) => {
+    const result = await verifyOtp(c.req.valid('json'));
     setAuthCookie(c, result.token);
-    return c.json({ user: result.user, tenant: result.tenant });
+    // Token is also returned in the body so a future native client (RN/Expo)
+    // can stash it and send it back via Authorization: Bearer.
+    return c.json(result);
+  })
+
+  .post('/onboarding', authMiddleware, zValidator('json', onboardingDto), async (c) => {
+    const result = await completeOnboarding(c.get('user'), c.req.valid('json'));
+    setAuthCookie(c, result.token);
+    return c.json(result);
   })
 
   .post('/logout', async (c) => {

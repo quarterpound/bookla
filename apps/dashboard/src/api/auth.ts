@@ -1,13 +1,27 @@
-import type { LoginDto, RegisterDto, MeResponseDto } from '@bookla/dto/auth';
+import type {
+  MeResponseDto,
+  OnboardingDto,
+  SendOtpDto,
+  VerifyOtpDto,
+} from '@bookla/dto/auth';
 import { baseService } from './base';
 
-export const register = async (dto: RegisterDto): Promise<MeResponseDto> => {
-  const { data } = await baseService.post<MeResponseDto>('/auth/register', dto);
+export interface VerifyOtpResponse extends MeResponseDto {
+  token: string;
+}
+
+export const sendOtp = async (dto: SendOtpDto): Promise<{ ok: true }> => {
+  const { data } = await baseService.post<{ ok: true }>('/auth/send-otp', dto);
   return data;
 };
 
-export const login = async (dto: LoginDto): Promise<MeResponseDto> => {
-  const { data } = await baseService.post<MeResponseDto>('/auth/login', dto);
+export const verifyOtp = async (dto: VerifyOtpDto): Promise<VerifyOtpResponse> => {
+  const { data } = await baseService.post<VerifyOtpResponse>('/auth/verify-otp', dto);
+  return data;
+};
+
+export const completeOnboarding = async (dto: OnboardingDto): Promise<VerifyOtpResponse> => {
+  const { data } = await baseService.post<VerifyOtpResponse>('/auth/onboarding', dto);
   return data;
 };
 

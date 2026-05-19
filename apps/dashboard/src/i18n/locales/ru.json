@@ -1,0 +1,209 @@
+{
+  "common": {
+    "appName": "Bookla",
+    "loading": "Загрузка…",
+    "submit": "Подтвердить",
+    "cancel": "Отмена",
+    "back": "Назад",
+    "signOut": "Выйти"
+  },
+  "shell": {
+    "tabBarLabel": "Основная навигация",
+    "localeSwitcherLabel": "Переключатель языка",
+    "tabs": {
+      "calendar": "Календарь",
+      "bookings": "Записи",
+      "clients": "Клиенты",
+      "settings": "Настройки"
+    }
+  },
+  "auth": {
+    "signInTitle": "Вход",
+    "signInSubtitle": "Мы отправим код на ваш телефон.",
+    "phoneLabel": "Номер телефона",
+    "phonePlaceholder": "+994501234567",
+    "sendCode": "Отправить код",
+    "sending": "Отправка…",
+    "codeTitle": "Введите код",
+    "sentTo": "Отправлен на {{phone}}",
+    "codeLabel": "6-значный код",
+    "verify": "Подтвердить",
+    "verifying": "Проверка…",
+    "changePhone": "Изменить телефон",
+    "errors": {
+      "sendFailed": "Не удалось отправить код",
+      "invalidCode": "Неверный код"
+    }
+  },
+  "calendar": {
+    "addBooking": "Добавить запись",
+    "emptyTitle": "На сегодня записей нет",
+    "emptyDescription": "Нажмите кнопку ниже, чтобы добавить."
+  },
+  "bookings": {
+    "emptyTitle": "Записей пока нет",
+    "emptyDescription": "Записи клиентов появятся здесь."
+  },
+  "clients": {
+    "emptyTitle": "Клиентов пока нет",
+    "emptyDescription": "Клиент добавляется автоматически при первой записи."
+  },
+  "settings": {
+    "signedInAs": "Аккаунт",
+    "businessLine": "Бизнес: {{name}} ({{slug}})",
+    "language": "Язык",
+    "rows": {
+      "services": {
+        "label": "Услуги",
+        "hint": "Управляйте услугами, которые клиенты могут забронировать"
+      },
+      "schedule": {
+        "label": "Часы работы",
+        "hint": "Настройте недельное расписание"
+      },
+      "daysOff": {
+        "label": "Выходные",
+        "hint": "Отметьте дни, когда вы закрыты"
+      }
+    }
+  },
+  "services": {
+    "title": "Услуги",
+    "newTitle": "Новая услуга",
+    "editTitle": "Редактировать услугу",
+    "addAction": "Новая услуга",
+    "addFirst": "Добавить первую услугу",
+    "save": "Сохранить",
+    "saving": "Сохраняем…",
+    "deactivate": "Отключить услугу",
+    "deactivating": "Отключаем…",
+    "emptyTitle": "Услуг пока нет",
+    "emptyDescription": "Добавьте хотя бы одну услугу, чтобы клиенты могли записаться.",
+    "fields": {
+      "name": "Название",
+      "namePlaceholder": "напр. Стрижка",
+      "duration": "Длительность",
+      "durationHint": "минут",
+      "price": "Цена",
+      "priceHint": "AZN"
+    },
+    "row": {
+      "duration": "{{minutes}} мин",
+      "inactive": "Отключена"
+    },
+    "activeToggle": {
+      "label": "Активна",
+      "hint": "Если отключить, услуга не будет видна при новых записях."
+    },
+    "errors": {
+      "loadFailed": "Не удалось загрузить услуги.",
+      "saveFailed": "Не удалось сохранить. Попробуйте снова."
+    }
+  },
+  "schedule": {
+    "title": "Часы работы",
+    "save": "Сохранить",
+    "saving": "Сохраняем…",
+    "addInterval": "+ Добавить интервал",
+    "removeInterval": "Удалить",
+    "copy": {
+      "openLabel": "Скопировать на другие дни",
+      "title": "Скопировать расписание ({{day}}) в…",
+      "weekdays": "Будни",
+      "weekends": "Выходные",
+      "allDays": "Все дни",
+      "apply_zero": "Выберите дни",
+      "apply_one": "Применить к 1 дню",
+      "apply_few": "Применить к {{count}} дням",
+      "apply_many": "Применить к {{count}} дням",
+      "apply_other": "Применить к {{count}} дням"
+    },
+    "fields": {
+      "start": "Начало",
+      "end": "Конец"
+    },
+    "days": {
+      "mon": "Понедельник",
+      "tue": "Вторник",
+      "wed": "Среда",
+      "thu": "Четверг",
+      "fri": "Пятница",
+      "sat": "Суббота",
+      "sun": "Воскресенье"
+    },
+    "errors": {
+      "loadFailed": "Не удалось загрузить расписание.",
+      "saveFailed": "Не удалось сохранить.",
+      "invalid": "Некоторые интервалы пересекаются или заканчиваются раньше начала."
+    },
+    "daysOff": {
+      "title": "Выходные",
+      "addAction": "Добавить выходной",
+      "addTitle": "Новый выходной",
+      "confirm": "Добавить",
+      "remove": "Удалить",
+      "dateLabel": "Дата",
+      "reasonLabel": "Причина (необязательно)",
+      "reasonPlaceholder": "напр. Отпуск",
+      "emptyTitle": "Запланированных выходных нет",
+      "emptyDescription": "Нажмите кнопку ниже, чтобы отметить закрытый день."
+    }
+  },
+  "newBooking": {
+    "title": "Новая запись",
+    "comingSoonTitle": "Скоро",
+    "comingSoonDescription": "Форма ручного создания записи появится в ближайшем обновлении."
+  },
+  "onboarding": {
+    "title": "Настройка",
+    "next": "Далее",
+    "finish": "Готово",
+    "submitting": "Сохраняем…",
+    "errors": {
+      "submit": "Не удалось завершить настройку. Попробуйте снова."
+    },
+    "business": {
+      "title": "Название бизнеса",
+      "subtitle": "Это название клиенты увидят на странице бронирования.",
+      "label": "Название",
+      "placeholder": "напр. Tural's Barbershop"
+    },
+    "slug": {
+      "title": "Выберите ссылку",
+      "subtitle": "Часть URL, которую вы будете давать клиентам.",
+      "label": "Часть URL",
+      "placeholder": "turals-barbershop",
+      "hint": "Только строчные буквы, цифры и дефисы (3–50 символов).",
+      "useSuggestion": "Использовать «{{suggestion}}»",
+      "errors": {
+        "taken": "Эта ссылка уже занята. Выберите другую."
+      }
+    },
+    "service": {
+      "title": "Добавьте первую услугу",
+      "subtitle": "Остальные можно добавить позже.",
+      "nameLabel": "Название услуги",
+      "namePlaceholder": "напр. Стрижка",
+      "durationLabel": "Длительность",
+      "durationHint": "минут",
+      "priceLabel": "Цена",
+      "priceHint": "AZN"
+    },
+    "hours": {
+      "title": "Рабочие часы",
+      "subtitle": "Это можно изменить позже в разделе «Расписание».",
+      "daysLabel": "Рабочие дни",
+      "openLabel": "Открытие",
+      "closeLabel": "Закрытие",
+      "days": {
+        "mon": "Пн",
+        "tue": "Вт",
+        "wed": "Ср",
+        "thu": "Чт",
+        "fri": "Пт",
+        "sat": "Сб",
+        "sun": "Вс"
+      }
+    }
+  }
+}

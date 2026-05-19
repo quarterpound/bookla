@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuthStore } from '../store/auth.store';
 
 export class ClientError extends Error {
   constructor(
@@ -17,6 +18,18 @@ export const baseService = axios.create({
   baseURL: baseUrl,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
+});
+
+// Attach Authorization: Bearer when we have an in-memory token. The httpOnly
+// cookie travels in parallel; the API middleware accepts either, so this is
+// purely additive — and means a future native client (RN/Expo) drops in here
+// without any other changes.
+baseService.interceptors.request.use((config) => {
+  const token = useAuthStore.getState().token;
+  if (token) {
+    config.headers.set('Authorization', `Bearer ${token}`);
+  }
+  return config;
 });
 
 baseService.interceptors.response.use(

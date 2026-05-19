@@ -76,7 +76,7 @@ export type {
   TenantUser,
   Staff,
   Service,
-  WorkingHours,
+  WorkingInterval,
   DayOff,
   Booking,
   Client,

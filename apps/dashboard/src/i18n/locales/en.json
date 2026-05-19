@@ -1,0 +1,207 @@
+{
+  "common": {
+    "appName": "Bookla",
+    "loading": "Loading…",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "back": "Back",
+    "signOut": "Sign out"
+  },
+  "shell": {
+    "tabBarLabel": "Main navigation",
+    "localeSwitcherLabel": "Language switcher",
+    "tabs": {
+      "calendar": "Calendar",
+      "bookings": "Bookings",
+      "clients": "Clients",
+      "settings": "Settings"
+    }
+  },
+  "auth": {
+    "signInTitle": "Sign in",
+    "signInSubtitle": "We'll text you a code to verify it's you.",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+994501234567",
+    "sendCode": "Send code",
+    "sending": "Sending…",
+    "codeTitle": "Enter code",
+    "sentTo": "Sent to {{phone}}",
+    "codeLabel": "6-digit code",
+    "verify": "Verify",
+    "verifying": "Verifying…",
+    "changePhone": "Change phone",
+    "errors": {
+      "sendFailed": "Failed to send code",
+      "invalidCode": "Invalid code"
+    }
+  },
+  "calendar": {
+    "addBooking": "Add booking",
+    "emptyTitle": "No bookings today",
+    "emptyDescription": "Tap the button below to add one."
+  },
+  "bookings": {
+    "emptyTitle": "No bookings yet",
+    "emptyDescription": "Bookings made by your clients will show here."
+  },
+  "clients": {
+    "emptyTitle": "No clients yet",
+    "emptyDescription": "Clients are added automatically when they book."
+  },
+  "settings": {
+    "signedInAs": "Account",
+    "businessLine": "Business: {{name}} ({{slug}})",
+    "language": "Language",
+    "rows": {
+      "services": {
+        "label": "Services",
+        "hint": "Manage what clients can book"
+      },
+      "schedule": {
+        "label": "Working hours",
+        "hint": "Set your weekly schedule"
+      },
+      "daysOff": {
+        "label": "Days off",
+        "hint": "Mark whole days you're closed"
+      }
+    }
+  },
+  "services": {
+    "title": "Services",
+    "newTitle": "New service",
+    "editTitle": "Edit service",
+    "addAction": "New service",
+    "addFirst": "Add your first service",
+    "save": "Save",
+    "saving": "Saving…",
+    "deactivate": "Deactivate service",
+    "deactivating": "Deactivating…",
+    "emptyTitle": "No services yet",
+    "emptyDescription": "Add at least one service so clients can book.",
+    "fields": {
+      "name": "Name",
+      "namePlaceholder": "e.g. Haircut",
+      "duration": "Duration",
+      "durationHint": "minutes",
+      "price": "Price",
+      "priceHint": "AZN"
+    },
+    "row": {
+      "duration": "{{minutes}} min",
+      "inactive": "Inactive"
+    },
+    "activeToggle": {
+      "label": "Active",
+      "hint": "When off, the service is hidden from new bookings."
+    },
+    "errors": {
+      "loadFailed": "Failed to load services.",
+      "saveFailed": "Failed to save. Try again."
+    }
+  },
+  "schedule": {
+    "title": "Working hours",
+    "save": "Save",
+    "saving": "Saving…",
+    "addInterval": "+ Add interval",
+    "removeInterval": "Remove",
+    "copy": {
+      "openLabel": "Copy to other days",
+      "title": "Copy {{day}}'s hours to…",
+      "weekdays": "Weekdays",
+      "weekends": "Weekend",
+      "allDays": "All days",
+      "apply_zero": "Pick days",
+      "apply_one": "Apply to 1 day",
+      "apply_other": "Apply to {{count}} days"
+    },
+    "fields": {
+      "start": "Start",
+      "end": "End"
+    },
+    "days": {
+      "mon": "Monday",
+      "tue": "Tuesday",
+      "wed": "Wednesday",
+      "thu": "Thursday",
+      "fri": "Friday",
+      "sat": "Saturday",
+      "sun": "Sunday"
+    },
+    "errors": {
+      "loadFailed": "Failed to load schedule.",
+      "saveFailed": "Failed to save.",
+      "invalid": "Some intervals overlap or end before they start."
+    },
+    "daysOff": {
+      "title": "Days off",
+      "addAction": "Add day off",
+      "addTitle": "New day off",
+      "confirm": "Add",
+      "remove": "Remove",
+      "dateLabel": "Date",
+      "reasonLabel": "Reason (optional)",
+      "reasonPlaceholder": "e.g. Holiday",
+      "emptyTitle": "No upcoming days off",
+      "emptyDescription": "Tap the button below to mark a closed day."
+    }
+  },
+  "newBooking": {
+    "title": "New booking",
+    "comingSoonTitle": "Coming soon",
+    "comingSoonDescription": "The manual booking flow lands in the next update."
+  },
+  "onboarding": {
+    "title": "Set up",
+    "next": "Continue",
+    "finish": "Finish",
+    "submitting": "Saving…",
+    "errors": {
+      "submit": "Setup failed. Try again."
+    },
+    "business": {
+      "title": "Name your business",
+      "subtitle": "This is what clients see on your booking page.",
+      "label": "Business name",
+      "placeholder": "e.g. Tural's Barbershop"
+    },
+    "slug": {
+      "title": "Pick your booking link",
+      "subtitle": "The bit at the end of the URL you share with clients.",
+      "label": "URL slug",
+      "placeholder": "turals-barbershop",
+      "hint": "Lowercase letters, numbers, and dashes only (3–50 chars).",
+      "useSuggestion": "Use “{{suggestion}}”",
+      "errors": {
+        "taken": "That link is already taken. Pick a different one."
+      }
+    },
+    "service": {
+      "title": "Add your first service",
+      "subtitle": "You can add more later.",
+      "nameLabel": "Service name",
+      "namePlaceholder": "e.g. Haircut",
+      "durationLabel": "Duration",
+      "durationHint": "minutes",
+      "priceLabel": "Price",
+      "priceHint": "AZN"
+    },
+    "hours": {
+      "title": "Your working hours",
+      "subtitle": "You can tweak this later in Schedule.",
+      "daysLabel": "Open days",
+      "openLabel": "Opens",
+      "closeLabel": "Closes",
+      "days": {
+        "mon": "Mon",
+        "tue": "Tue",
+        "wed": "Wed",
+        "thu": "Thu",
+        "fri": "Fri",
+        "sat": "Sat",
+        "sun": "Sun"
+      }
+    }
+  }
+}

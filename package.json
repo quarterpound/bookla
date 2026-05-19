@@ -18,7 +18,8 @@
     "prisma:seed": "tsx prisma/seed.ts"
   },
   "devDependencies": {
-    "@types/node": "^22.10.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "@types/node": "^22.19.19",
     "dotenv": "^16.4.7",
     "prisma": "^7.0.0",
     "tsx": "^4.19.2",

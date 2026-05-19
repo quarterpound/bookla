@@ -105,16 +105,13 @@ async function main() {
     }),
   ]);
 
-  // Mon–Sat working hours (dayOfWeek 0=Mon ... 5=Sat). Closed on Sunday (6).
-  await prisma.workingHours.createMany({
-    data: [0, 1, 2, 3, 4, 5].map((dayOfWeek) => ({
-      staffId: staff.id,
-      dayOfWeek,
-      startTime: '09:00',
-      endTime: '19:00',
-      breakStartTime: '13:00',
-      breakEndTime: '14:00',
-    })),
+  // Mon–Sat working intervals (dayOfWeek 0=Mon ... 5=Sat). Closed on Sunday (6).
+  // Each day has two intervals: morning + afternoon, separated by a lunch gap.
+  await prisma.workingInterval.createMany({
+    data: [0, 1, 2, 3, 4, 5].flatMap((dayOfWeek) => [
+      { staffId: staff.id, dayOfWeek, startTime: '09:00', endTime: '13:00' },
+      { staffId: staff.id, dayOfWeek, startTime: '14:00', endTime: '19:00' },
+    ]),
   });
 
   const client = await prisma.client.create({
@@ -195,7 +192,7 @@ async function main() {
 
   console.log(`Seeded tenant ${tenant.slug} (owner phone ${OWNER_PHONE}).`);
   console.log(`  - ${1} owner user, ${1} staff`);
-  console.log(`  - 3 services, 6 working-hours rows (Mon–Sat)`);
+  console.log(`  - 3 services, 12 working-intervals (Mon–Sat morning+afternoon)`);
   console.log(`  - 1 client, ${bookings.length} bookings`);
 }
 

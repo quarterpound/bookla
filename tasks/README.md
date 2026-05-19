@@ -11,7 +11,7 @@ Task numbering matches the **Build order** section of the adapted plan.
 | 03 | [Dashboard mobile shell + PWA](./03-dashboard-mobile-shell.md) | `apps/dashboard` |
 | 04 | [Dashboard auth UI](./04-dashboard-auth-ui.md) | `apps/dashboard` |
 | 05 | [Services CRUD](./05-services-crud.md) | `apps/api`, `apps/dashboard`, `packages/dto` |
-| 06 | [Schedule (working hours + days off)](./06-schedule.md) | `apps/api`, `apps/dashboard`, `packages/dto` |
+| 06 | [Schedule (work intervals + days off)](./06-schedule.md) | `prisma/`, `apps/api`, `apps/dashboard`, `packages/dto`, `packages/db` |
 | 07 | [`packages/slots` engine + tests](./07-slots-engine.md) | `packages/slots`, `apps/api` |
 | 08 | [Storefront scaffold + public booking flow](./08-storefront-public-booking.md) | `apps/storefront`, `apps/api` |
 | 09 | [Dashboard calendar view](./09-dashboard-calendar.md) | `apps/dashboard` |
@@ -24,5 +24,12 @@ Task numbering matches the **Build order** section of the adapted plan.
 | 16 | [Billing page (informational)](./16-billing.md) | `apps/dashboard` |
 | 17 | [PWA polish & install prompt](./17-pwa-polish.md) | `apps/dashboard` |
 | 18 | [End-to-end polish](./18-polish.md) | all |
+
+## Post-MVP
+
+| # | Task | Touches |
+|---|---|---|
+| 19 | [Social login (Google + Apple)](./19-social-login.md) | `prisma/`, `apps/api`, `apps/dashboard`, `packages/dto` |
+| 20 | [Personal account management](./20-account-management.md) | `apps/api`, `apps/dashboard`, `packages/dto` |
 
 See [`plans/mvp-adapted.md`](../plans/mvp-adapted.md) §"Verification" for the end-to-end check list once everything is wired.

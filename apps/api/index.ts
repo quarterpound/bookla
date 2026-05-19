@@ -7,6 +7,9 @@ import { env } from './env';
 import { getPrismaClient } from './db';
 import { AppError } from './utils/errors';
 import { authController } from './routes/auth/auth.controller';
+import { scheduleController } from './routes/schedule/schedule.controller';
+import { servicesController } from './routes/services/services.controller';
+import { staffController } from './routes/staff/staff.controller';
 import { tenantsController } from './routes/tenants/tenants.controller';
 
 const allowedOrigins = env.ALLOWED_ORIGINS;
@@ -46,6 +49,9 @@ export const app = new Hono()
   })
 
   .route('/auth', authController)
+  .route('/schedule', scheduleController)
+  .route('/services', servicesController)
+  .route('/staff', staffController)
   .route('/tenants', tenantsController);
 
 export type AppType = typeof app;

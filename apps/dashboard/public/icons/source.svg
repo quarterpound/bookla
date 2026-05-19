@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Cream background tile. -->
+  <rect width="512" height="512" rx="96" fill="#faf3e3"/>
+  <!-- "B" mark in gold. Two stacked half-circle bumps, classic stylized B. -->
+  <g transform="translate(132 116) scale(2.0833)" fill="none" stroke="#b88a1c" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 4h70a40 40 0 0 1 0 60H5z"/>
+    <path d="M5 64h80a40 40 0 0 1 0 60H5z"/>
+  </g>
+</svg>
