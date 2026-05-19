@@ -17,6 +17,7 @@
     "clean": "rm -rf .turbo"
   },
   "dependencies": {
+    "@bookla/slots": "workspace:*",
     "zod": "^3.24.1"
   },
   "devDependencies": {

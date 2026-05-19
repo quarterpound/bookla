@@ -14,6 +14,7 @@
     "@bookla/db": "workspace:*",
     "@bookla/dto": "workspace:*",
     "@bookla/messaging": "workspace:*",
+    "@bookla/slots": "workspace:*",
     "@bookla/utils": "workspace:*",
     "@hono/node-server": "^1.13.7",
     "@hono/zod-validator": "^0.4.2",

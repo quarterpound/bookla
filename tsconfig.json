@@ -17,7 +17,8 @@
       "@api/*": ["./apps/api/*"],
       "@dto/*": ["./packages/dto/*"],
       "@db/*": ["./packages/db/*"],
-      "@utils/*": ["./packages/utils/*"]
+      "@utils/*": ["./packages/utils/*"],
+      "@bookla/slots": ["./packages/slots/index.ts"]
     }
   },
   "exclude": ["node_modules", "dist", "**/dist"]

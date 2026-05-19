@@ -1,14 +1,20 @@
 import { z } from 'zod';
+import { SLOT_INTERVAL_MINUTES } from '@bookla/slots';
 
 /**
  * Service DTOs. Price is stored as integer qəpik (1 AZN = 100 qəpik).
- * Duration is in minutes; the multiple-of-15 constraint lives in the slot
- * engine (task 07) — for now we only require a positive integer so this task
- * doesn't depend on that package.
+ * Duration is in minutes and must align with the slot engine's interval.
  */
 
 const nameField = z.string().trim().min(1, 'Name is required').max(80);
-const durationField = z.number().int().positive().max(8 * 60);
+const durationField = z
+  .number()
+  .int()
+  .positive()
+  .max(8 * 60)
+  .refine((v) => v % SLOT_INTERVAL_MINUTES === 0, {
+    message: `Duration must be a multiple of ${SLOT_INTERVAL_MINUTES} minutes`,
+  });
 const priceField = z.number().int().nonnegative();
 const currencyField = z.string().trim().min(1).max(8).default('AZN');
 const sortOrderField = z.number().int().nonnegative();
