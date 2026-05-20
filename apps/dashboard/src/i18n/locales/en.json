@@ -38,11 +38,52 @@
   "calendar": {
     "addBooking": "Add booking",
     "emptyTitle": "No bookings today",
-    "emptyDescription": "Tap the button below to add one."
+    "emptyDescription": "Tap the button below to add one.",
+    "prev": "Previous",
+    "next": "Next",
+    "viewDay": "Day",
+    "viewWeek": "Week",
+    "noBookings": "Free",
+    "bookingsCount_one": "{{count}} booking",
+    "bookingsCount_other": "{{count}} bookings",
+    "errors": {
+      "loadFailed": "Couldn't load bookings."
+    }
   },
   "bookings": {
     "emptyTitle": "No bookings yet",
-    "emptyDescription": "Bookings made by your clients will show here."
+    "emptyDescription": "Bookings made by your clients will show here.",
+    "filters": {
+      "all": "All",
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "no_show": "No-show"
+    },
+    "status": {
+      "confirmed": "Confirmed",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "no_show": "No-show"
+    },
+    "errors": {
+      "loadFailed": "Couldn't load bookings."
+    }
+  },
+  "booking": {
+    "title": "Booking",
+    "client": "Client",
+    "service": "Service",
+    "notes": "Notes",
+    "actions": {
+      "markCompleted": "Mark completed",
+      "markNoShow": "Mark no-show",
+      "cancel": "Cancel booking"
+    },
+    "errors": {
+      "loadFailed": "Couldn't load this booking.",
+      "updateFailed": "Couldn't update the booking. Try again."
+    }
   },
   "clients": {
     "emptyTitle": "No clients yet",

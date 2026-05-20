@@ -38,11 +38,54 @@
   "calendar": {
     "addBooking": "Добавить запись",
     "emptyTitle": "На сегодня записей нет",
-    "emptyDescription": "Нажмите кнопку ниже, чтобы добавить."
+    "emptyDescription": "Нажмите кнопку ниже, чтобы добавить.",
+    "prev": "Назад",
+    "next": "Вперёд",
+    "viewDay": "День",
+    "viewWeek": "Неделя",
+    "noBookings": "Свободно",
+    "bookingsCount_one": "{{count}} запись",
+    "bookingsCount_few": "{{count}} записи",
+    "bookingsCount_many": "{{count}} записей",
+    "bookingsCount_other": "{{count}} записей",
+    "errors": {
+      "loadFailed": "Не удалось загрузить записи."
+    }
   },
   "bookings": {
     "emptyTitle": "Записей пока нет",
-    "emptyDescription": "Записи клиентов появятся здесь."
+    "emptyDescription": "Записи клиентов появятся здесь.",
+    "filters": {
+      "all": "Все",
+      "confirmed": "Подтверждённые",
+      "completed": "Завершённые",
+      "cancelled": "Отменённые",
+      "no_show": "Не пришли"
+    },
+    "status": {
+      "confirmed": "Подтверждена",
+      "completed": "Завершена",
+      "cancelled": "Отменена",
+      "no_show": "Не пришёл"
+    },
+    "errors": {
+      "loadFailed": "Не удалось загрузить записи."
+    }
+  },
+  "booking": {
+    "title": "Запись",
+    "client": "Клиент",
+    "service": "Услуга",
+    "notes": "Заметки",
+    "actions": {
+      "markCompleted": "Отметить как завершённую",
+      "markNoShow": "Отметить как не пришёл",
+      "cancel": "Отменить запись"
+    },
+    "errors": {
+      "loadFailed": "Не удалось загрузить запись.",
+      "updateFailed": "Не удалось обновить запись. Попробуйте ещё раз."
+    }
   },
   "clients": {
     "emptyTitle": "Клиентов пока нет",

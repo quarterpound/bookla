@@ -11,6 +11,7 @@
     "./schedule": "./schedule.ts",
     "./services": "./services.ts",
     "./public": "./public.ts",
+    "./bookings": "./bookings.ts",
     "./blocked-phones": "./blocked-phones.ts",
     "./utils": "./utils.ts"
   },

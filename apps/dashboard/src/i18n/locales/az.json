@@ -38,11 +38,52 @@
   "calendar": {
     "addBooking": "Rezerv əlavə et",
     "emptyTitle": "Bu gün üçün rezerv yoxdur",
-    "emptyDescription": "Yeni rezerv əlavə etmək üçün aşağıdakı düyməyə toxunun."
+    "emptyDescription": "Yeni rezerv əlavə etmək üçün aşağıdakı düyməyə toxunun.",
+    "prev": "Əvvəlki",
+    "next": "Növbəti",
+    "viewDay": "Gün",
+    "viewWeek": "Həftə",
+    "noBookings": "Boş",
+    "bookingsCount_one": "{{count}} rezerv",
+    "bookingsCount_other": "{{count}} rezerv",
+    "errors": {
+      "loadFailed": "Rezervləri yükləmək alınmadı."
+    }
   },
   "bookings": {
     "emptyTitle": "Hələ rezerv yoxdur",
-    "emptyDescription": "Müştərilərin etdiyi rezervlər burada görünəcək."
+    "emptyDescription": "Müştərilərin etdiyi rezervlər burada görünəcək.",
+    "filters": {
+      "all": "Hamısı",
+      "confirmed": "Təsdiqlənmiş",
+      "completed": "Tamamlanmış",
+      "cancelled": "İmtina edilmiş",
+      "no_show": "Gəlməyib"
+    },
+    "status": {
+      "confirmed": "Təsdiqlənmiş",
+      "completed": "Tamamlanmış",
+      "cancelled": "İmtina edilmiş",
+      "no_show": "Gəlməyib"
+    },
+    "errors": {
+      "loadFailed": "Rezervləri yükləmək alınmadı."
+    }
+  },
+  "booking": {
+    "title": "Rezerv",
+    "client": "Müştəri",
+    "service": "Xidmət",
+    "notes": "Qeydlər",
+    "actions": {
+      "markCompleted": "Tamamlandı kimi işarələ",
+      "markNoShow": "Gəlmədi kimi işarələ",
+      "cancel": "Rezervi imtina et"
+    },
+    "errors": {
+      "loadFailed": "Rezervi yükləmək alınmadı.",
+      "updateFailed": "Rezervi yeniləmək alınmadı. Yenidən cəhd edin."
+    }
   },
   "clients": {
     "emptyTitle": "Hələ müştəri yoxdur",

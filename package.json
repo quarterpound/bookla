@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Bookla — multi-tenant booking application",
-  "packageManager": "pnpm@11.1.2",
+  "packageManager": "pnpm@11.1.3",
   "scripts": {
     "dev": "turbo run dev",
     "dev:api": "turbo run dev --filter=@bookla/api",

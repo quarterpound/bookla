@@ -8,6 +8,7 @@ import { getPrismaClient } from './db';
 import { AppError } from './utils/errors';
 import { authController } from './routes/auth/auth.controller';
 import { blockedPhonesController } from './routes/blocked-phones/blocked-phones.controller';
+import { bookingsController } from './routes/bookings/bookings.controller';
 import { publicController } from './routes/public/public.controller';
 import { scheduleController } from './routes/schedule/schedule.controller';
 import { servicesController } from './routes/services/services.controller';
@@ -52,6 +53,7 @@ export const app = new Hono()
 
   .route('/auth', authController)
   .route('/blocked-phones', blockedPhonesController)
+  .route('/bookings', bookingsController)
   .route('/public', publicController)
   .route('/schedule', scheduleController)
   .route('/services', servicesController)

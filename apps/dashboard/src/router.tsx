@@ -6,6 +6,7 @@ import { BookingsTab } from './pages/tabs/bookings';
 import { ClientsTab } from './pages/tabs/clients';
 import { SettingsTab } from './pages/tabs/settings';
 import { NewBookingPage } from './pages/bookings/new';
+import { BookingDetailPage } from './pages/bookings/detail';
 import { ServicesListPage } from './pages/services';
 import { ServicesNewPage } from './pages/services/new';
 import { ServicesDetailPage } from './pages/services/detail';
@@ -46,6 +47,7 @@ export const router = createBrowserRouter([
           },
           // Pushed routes — rendered with their own AppShell (back + hideTabs).
           { path: 'bookings/new', element: <NewBookingPage /> },
+          { path: 'bookings/:id', element: <BookingDetailPage /> },
           { path: 'services', element: <ServicesListPage /> },
           { path: 'services/new', element: <ServicesNewPage /> },
           { path: 'services/:id', element: <ServicesDetailPage /> },

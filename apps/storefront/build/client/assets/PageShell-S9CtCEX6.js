@@ -1,0 +1,1 @@
+import{p as e}from"./chunk-4N6VE7H7-Dvo6L692.js";const s=({children:a})=>e.jsx("main",{className:"mx-auto flex min-h-dvh w-full max-w-[var(--container-app)] flex-col gap-6 px-4 pb-[calc(env(safe-area-inset-bottom)+2.5rem)] pt-[calc(env(safe-area-inset-top)+2rem)] sm:max-w-lg sm:pt-[calc(env(safe-area-inset-top)+3rem)]",children:a});export{s as P};
