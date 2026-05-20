@@ -78,6 +78,12 @@ export const SettingsTab = () => {
           hint={t('settings.rows.daysOff.hint')}
           onClick={() => navigate('/schedule/days-off')}
         />
+        <SettingsRow
+          icon={<BookingsIcon width={20} height={20} aria-hidden />}
+          label={t('settings.rows.blockedPhones.label')}
+          hint={t('settings.rows.blockedPhones.hint')}
+          onClick={() => navigate('/settings/blocked-phones')}
+        />
       </section>
 
       <section className="flex flex-col gap-3">

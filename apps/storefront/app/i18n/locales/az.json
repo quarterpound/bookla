@@ -1,0 +1,111 @@
+{
+  "common": {
+    "appName": "Bookla",
+    "back": "Geri",
+    "next": "Növbəti",
+    "loading": "Yüklənir…",
+    "tryAgain": "Yenidən cəhd et"
+  },
+  "landing": {
+    "title": "Bookla",
+    "description": "Bir biznesin bron səhifəsinə daxil olmaq üçün düzgün linki istifadə edin.",
+    "notFoundTitle": "Səhifə tapılmadı",
+    "notFoundDescription": "Açmaq istədiyiniz ünvan mövcud deyil."
+  },
+  "booking": {
+    "stepLabel": "{{current}}/{{total}}",
+    "steps": {
+      "service": "Xidmət",
+      "staff": "Usta",
+      "date": "Tarix",
+      "slot": "Vaxt",
+      "form": "Məlumatlar"
+    },
+    "service": {
+      "title": "Xidmət seçin",
+      "subtitle": "Bron etmək istədiyiniz xidməti seçin.",
+      "durationMinutes": "{{minutes}} dəq",
+      "empty": "Bu biznesin hazırda aktiv xidməti yoxdur."
+    },
+    "staff": {
+      "title": "Usta seçin",
+      "subtitle": "Sizə xidmət göstərəcək ustanı seçin.",
+      "empty": "Bu biznesdə aktiv usta yoxdur."
+    },
+    "date": {
+      "title": "Tarix seçin",
+      "subtitle": "Növbəti 14 gün arasından bir gün seçin.",
+      "disabled": {
+        "off": "bağlı",
+        "full": "dolu"
+      },
+      "weekday": {
+        "0": "B.e",
+        "1": "Ç.a",
+        "2": "Ç",
+        "3": "C.a",
+        "4": "C",
+        "5": "Ş",
+        "6": "B"
+      }
+    },
+    "slot": {
+      "title": "Vaxt seçin",
+      "subtitle": "Xidmət {{minutes}} dəq davam edir. Başlama vaxtını seçin:",
+      "loading": "Vaxtlar yüklənir…",
+      "empty": "Bu gün üçün boş vaxt yoxdur. Başqa tarix seçin.",
+      "error": "Vaxtları yükləmək alınmadı.",
+      "sections": {
+        "morning": "Səhər",
+        "afternoon": "Günorta",
+        "evening": "Axşam"
+      }
+    },
+    "form": {
+      "title": "Məlumatlarınız",
+      "subtitle": "Bron təsdiqi üçün əlaqə üsulu.",
+      "nameLabel": "Ad",
+      "namePlaceholder": "Adınız",
+      "phoneLabel": "Telefon",
+      "phonePlaceholder": "+994501234567",
+      "emailLabel": "E-poçt (istəyə bağlı)",
+      "emailPlaceholder": "siz@nümunə.az",
+      "notesLabel": "Qeyd (istəyə bağlı)",
+      "notesPlaceholder": "Bizə bildirmək istədiyiniz nəsə",
+      "summaryTitle": "Bron məlumatları",
+      "summaryService": "Xidmət",
+      "summaryStaff": "Usta",
+      "summaryDate": "Tarix",
+      "summaryTime": "Vaxt",
+      "summaryDuration": "Müddət",
+      "summaryPrice": "Qiymət",
+      "durationValue": "{{minutes}} dəq",
+      "submit": "Bronu təsdiqlə",
+      "submitting": "Göndərilir…",
+      "errors": {
+        "generic": "Bron yaratmaq alınmadı. Yenidən cəhd edin.",
+        "slotTaken": "Bu vaxt artıq tutulub. Başqa vaxt seçin.",
+        "invalid": "Məlumatlarınızı yoxlayın.",
+        "blocked": "Bu telefon nömrəsi hazırda burada bron edə bilməz. Zəhmət olmasa biznes ilə birbaşa əlaqə saxlayın."
+      }
+    }
+  },
+  "confirmation": {
+    "title": "Bron təsdiqləndi",
+    "subtitle": "Detallar aşağıdadır. Linki saxlayın və ya əlinizdə saxlayın.",
+    "labels": {
+      "service": "Xidmət",
+      "staff": "Usta",
+      "date": "Tarix",
+      "time": "Vaxt",
+      "duration": "Müddət",
+      "price": "Qiymət",
+      "notes": "Qeyd",
+      "client": "Sizin haqqınızda",
+      "business": "Biznes"
+    },
+    "notFoundTitle": "Bron tapılmadı",
+    "notFoundDescription": "Bu link köhnə və ya yanlış ola bilər.",
+    "newBookingAction": "Başqa bron yarat"
+  }
+}

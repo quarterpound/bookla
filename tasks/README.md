@@ -31,5 +31,9 @@ Task numbering matches the **Build order** section of the adapted plan.
 |---|---|---|
 | 19 | [Social login (Google + Apple)](./19-social-login.md) | `prisma/`, `apps/api`, `apps/dashboard`, `packages/dto` |
 | 20 | [Personal account management](./20-account-management.md) | `apps/api`, `apps/dashboard`, `packages/dto` |
+| 21 | [Multilingual services (az/en/ru)](./21-multilingual-services.md) | `prisma/`, `apps/api`, `apps/dashboard`, `apps/storefront`, `packages/dto` |
+| 22 | [Lateness tracking](./22-late-tracking.md) | `prisma/`, `apps/api`, `apps/dashboard` |
+| 23 | [Storefront business profile](./23-storefront-business-profile.md) | `prisma/`, `apps/api`, `apps/dashboard`, `apps/storefront`, `packages/dto` |
+| 24 | [Native app shell + push (Capacitor, iOS-first)](./24-native-app-push.md) | `prisma/`, `apps/api`, `apps/dashboard`, `packages/push` |
 
 See [`plans/mvp-adapted.md`](../plans/mvp-adapted.md) §"Verification" for the end-to-end check list once everything is wired.

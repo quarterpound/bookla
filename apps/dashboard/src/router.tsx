@@ -11,6 +11,7 @@ import { ServicesNewPage } from './pages/services/new';
 import { ServicesDetailPage } from './pages/services/detail';
 import { SchedulePage } from './pages/schedule';
 import { DaysOffPage } from './pages/schedule/days-off';
+import { BlockedPhonesPage } from './pages/blocked-phones';
 import { AuthRoute, ProtectedRoute } from './components/protected-route';
 import { TabsLayout } from './components/TabsLayout';
 
@@ -50,6 +51,7 @@ export const router = createBrowserRouter([
           { path: 'services/:id', element: <ServicesDetailPage /> },
           { path: 'schedule', element: <SchedulePage /> },
           { path: 'schedule/days-off', element: <DaysOffPage /> },
+          { path: 'settings/blocked-phones', element: <BlockedPhonesPage /> },
         ],
       },
     ],

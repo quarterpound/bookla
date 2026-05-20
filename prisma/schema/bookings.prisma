@@ -39,6 +39,7 @@ model Client {
 
   name      String
   phone     String
+  email     String?
   notes     String?
 
   createdAt DateTime @default(now()) @map("created_at")
@@ -49,4 +50,30 @@ model Client {
   @@unique([tenantId, phone])
   @@index([tenantId])
   @@map("clients")
+}
+
+/**
+ * Per-tenant phone blocklist. When `(tenantId, phone)` is present here, the
+ * public booking endpoint refuses to create new bookings for that phone —
+ * task 12 ships this for no-show / late-arrival enforcement. Existing
+ * bookings are NOT touched on insert; tenants cancel those manually if they
+ * want to. Platform-wide bans aren't supported yet — we'd model that by
+ * making `tenantId` nullable (null = global), but no UI for it.
+ */
+model BlockedPhone {
+  id              Int         @id @default(autoincrement())
+  tenantId        Int         @map("tenant_id")
+  tenant          Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  phone           String                              // E.164
+  reason          String?
+
+  blockedByUserId Int?        @map("blocked_by_user_id")
+  blockedBy       TenantUser? @relation(fields: [blockedByUserId], references: [id], onDelete: SetNull)
+
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  @@unique([tenantId, phone])
+  @@index([tenantId])
+  @@map("blocked_phones")
 }

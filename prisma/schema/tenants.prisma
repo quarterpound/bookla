@@ -12,11 +12,12 @@ model Tenant {
   createdAt   DateTime      @default(now()) @map("created_at")
   updatedAt   DateTime      @updatedAt      @map("updated_at")
 
-  users    TenantUser[]
-  staff    Staff[]
-  services Service[]
-  clients  Client[]
-  bookings Booking[]
+  users          TenantUser[]
+  staff          Staff[]
+  services       Service[]
+  clients        Client[]
+  bookings       Booking[]
+  blockedPhones  BlockedPhone[]
 
   @@map("tenants")
 }
@@ -37,7 +38,8 @@ model TenantUser {
   updatedAt    DateTime     @updatedAt      @map("updated_at")
   lastLoginAt  DateTime?    @map("last_login_at")
 
-  staffProfiles Staff[]
+  staffProfiles  Staff[]
+  blockedPhones  BlockedPhone[]
 
   @@index([phone])
   @@map("tenant_users")

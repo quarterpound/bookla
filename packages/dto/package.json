@@ -10,6 +10,8 @@
     "./auth": "./auth.ts",
     "./schedule": "./schedule.ts",
     "./services": "./services.ts",
+    "./public": "./public.ts",
+    "./blocked-phones": "./blocked-phones.ts",
     "./utils": "./utils.ts"
   },
   "scripts": {

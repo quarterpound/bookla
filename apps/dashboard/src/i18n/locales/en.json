@@ -64,7 +64,29 @@
       "daysOff": {
         "label": "Days off",
         "hint": "Mark whole days you're closed"
+      },
+      "blockedPhones": {
+        "label": "Blocked numbers",
+        "hint": "Phone numbers that can't book with you"
       }
+    }
+  },
+  "blockedPhones": {
+    "title": "Blocked numbers",
+    "subtitle": "These phones can't create new bookings at your business. Existing bookings aren't touched.",
+    "addAction": "Block a number",
+    "addTitle": "Block a number",
+    "confirm": "Block",
+    "saving": "Saving…",
+    "remove": "Remove",
+    "emptyTitle": "No blocked numbers",
+    "emptyDescription": "Block clients who repeatedly no-show or cause problems here.",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+994501234567",
+    "reasonLabel": "Reason (optional)",
+    "reasonPlaceholder": "e.g. Three no-shows",
+    "errors": {
+      "saveFailed": "Could not block. Try again."
     }
   },
   "services": {

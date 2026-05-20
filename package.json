@@ -8,6 +8,7 @@
     "dev": "turbo run dev",
     "dev:api": "turbo run dev --filter=@bookla/api",
     "dev:dashboard": "turbo run dev --filter=@bookla/dashboard",
+    "dev:storefront": "turbo run dev --filter=@bookla/storefront",
     "build": "turbo run build",
     "typecheck": "turbo run typecheck",
     "lint": "turbo run lint",

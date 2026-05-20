@@ -24,11 +24,17 @@ const envSchema = z
 
     AWS_REGION: z.string().default('us-east-2'),
 
-    // Comma-separated list of origins permitted for CORS.
+    // Comma-separated list of origins permitted for CORS. Defaults cover both
+    // the dashboard (5173) and the storefront SSR app (3000) in local dev.
     ALLOWED_ORIGINS: z
       .string()
-      .default('http://localhost:5173')
+      .default('http://localhost:5173,http://localhost:3000')
       .transform((v) => v.split(',').map((s) => s.trim()).filter(Boolean)),
+
+    // Used by apps/storefront server-side fetches to reach the API directly
+    // (e.g. ALB internal hostname in prod). Not consumed by the API itself —
+    // listed here so the env contract for the whole repo lives in one place.
+    INTERNAL_API_URL: z.string().optional(),
 
     // Cookie domain — leave unset for localhost.
     COOKIE_DOMAIN: z.string().optional(),

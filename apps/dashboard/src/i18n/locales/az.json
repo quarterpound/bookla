@@ -64,7 +64,29 @@
       "daysOff": {
         "label": "İş günü olmayan günlər",
         "hint": "Bağlı olduğunuz günləri əlavə edin"
+      },
+      "blockedPhones": {
+        "label": "Bloklanmış nömrələr",
+        "hint": "Bron edə bilməyən müştəri nömrələri"
       }
+    }
+  },
+  "blockedPhones": {
+    "title": "Bloklanmış nömrələr",
+    "subtitle": "Bu nömrələr biznesinizdə yeni bron yarada bilməz. Mövcud bronlar toxunulmazdır.",
+    "addAction": "Nömrə əlavə et",
+    "addTitle": "Nömrəni blokla",
+    "confirm": "Blokla",
+    "saving": "Yadda saxlanılır…",
+    "remove": "Sil",
+    "emptyTitle": "Heç bir nömrə bloklanmayıb",
+    "emptyDescription": "Vaxtında gəlməyən və ya problem yaradan müştəriləri burada bloklaya bilərsiniz.",
+    "phoneLabel": "Telefon nömrəsi",
+    "phonePlaceholder": "+994501234567",
+    "reasonLabel": "Səbəb (istəyə bağlı)",
+    "reasonPlaceholder": "məs. Üç dəfə gəlməyib",
+    "errors": {
+      "saveFailed": "Bloklamaq alınmadı."
     }
   },
   "services": {
