@@ -13,6 +13,7 @@
     "./public": "./public.ts",
     "./bookings": "./bookings.ts",
     "./blocked-phones": "./blocked-phones.ts",
+    "./clients": "./clients.ts",
     "./utils": "./utils.ts"
   },
   "scripts": {

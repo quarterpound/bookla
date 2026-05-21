@@ -89,7 +89,39 @@
   },
   "clients": {
     "emptyTitle": "Клиентов пока нет",
-    "emptyDescription": "Клиент добавляется автоматически при первой записи."
+    "emptyDescription": "Клиент добавляется автоматически при первой записи.",
+    "searchLabel": "Поиск клиентов",
+    "searchPlaceholder": "Имя или телефон",
+    "searchEmptyTitle": "Ничего не найдено",
+    "searchEmptyDescription": "По запросу «{{query}}» ничего не найдено.",
+    "loadMore": "Загрузить ещё",
+    "row": {
+      "lastSeen": "Последний визит: {{date}}",
+      "noBookings": "Пока нет записей",
+      "bookingCount_one": "{{count}} запись",
+      "bookingCount_few": "{{count}} записи",
+      "bookingCount_many": "{{count}} записей",
+      "bookingCount_other": "{{count}} записей"
+    },
+    "errors": {
+      "loadFailed": "Не удалось загрузить клиентов."
+    }
+  },
+  "clientDetail": {
+    "title": "Клиент",
+    "contact": "Контакты",
+    "notesLabel": "Заметки",
+    "notesPlaceholder": "Личные заметки об этом клиенте",
+    "notesHint": "Видны только вам. Сохраняются автоматически.",
+    "notesSaving": "Сохраняем…",
+    "notesSaved": "Сохранено",
+    "historyTitle": "История записей",
+    "historyEmptyTitle": "Пока нет записей",
+    "historyEmptyDescription": "Записи этого клиента появятся здесь.",
+    "errors": {
+      "loadFailed": "Не удалось загрузить клиента.",
+      "saveNotesFailed": "Не удалось сохранить заметки."
+    }
   },
   "settings": {
     "signedInAs": "Аккаунт",

@@ -87,7 +87,37 @@
   },
   "clients": {
     "emptyTitle": "Hələ müştəri yoxdur",
-    "emptyDescription": "İlk rezerv olduqda müştəri avtomatik əlavə olunacaq."
+    "emptyDescription": "İlk rezerv olduqda müştəri avtomatik əlavə olunacaq.",
+    "searchLabel": "Müştəri axtar",
+    "searchPlaceholder": "Ad və ya telefon",
+    "searchEmptyTitle": "Heç nə tapılmadı",
+    "searchEmptyDescription": "“{{query}}” üzrə uyğun nəticə yoxdur.",
+    "loadMore": "Daha çox göstər",
+    "row": {
+      "lastSeen": "Son: {{date}}",
+      "noBookings": "Hələ rezerv yoxdur",
+      "bookingCount_one": "{{count}} rezerv",
+      "bookingCount_other": "{{count}} rezerv"
+    },
+    "errors": {
+      "loadFailed": "Müştəriləri yükləmək alınmadı."
+    }
+  },
+  "clientDetail": {
+    "title": "Müştəri",
+    "contact": "Əlaqə",
+    "notesLabel": "Qeydlər",
+    "notesPlaceholder": "Bu müştəri haqqında özəl qeydlər",
+    "notesHint": "Yalnız siz görürsünüz. Avtomatik yadda saxlanır.",
+    "notesSaving": "Saxlanılır…",
+    "notesSaved": "Saxlanıldı",
+    "historyTitle": "Rezerv tarixçəsi",
+    "historyEmptyTitle": "Hələ rezerv yoxdur",
+    "historyEmptyDescription": "İlk rezerv yarandıqda burada görünəcək.",
+    "errors": {
+      "loadFailed": "Müştəri məlumatlarını yükləmək alınmadı.",
+      "saveNotesFailed": "Qeydləri yadda saxlamaq alınmadı."
+    }
   },
   "settings": {
     "signedInAs": "Hesab",

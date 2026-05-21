@@ -5,3 +5,4 @@ export * as services from './services';
 export * as bookings from './bookings';
 export * as publicDto from './public';
 export * as blockedPhones from './blocked-phones';
+export * as clients from './clients';

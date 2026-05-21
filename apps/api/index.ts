@@ -9,6 +9,7 @@ import { AppError } from './utils/errors';
 import { authController } from './routes/auth/auth.controller';
 import { blockedPhonesController } from './routes/blocked-phones/blocked-phones.controller';
 import { bookingsController } from './routes/bookings/bookings.controller';
+import { clientsController } from './routes/clients/clients.controller';
 import { publicController } from './routes/public/public.controller';
 import { scheduleController } from './routes/schedule/schedule.controller';
 import { servicesController } from './routes/services/services.controller';
@@ -54,6 +55,7 @@ export const app = new Hono()
   .route('/auth', authController)
   .route('/blocked-phones', blockedPhonesController)
   .route('/bookings', bookingsController)
+  .route('/clients', clientsController)
   .route('/public', publicController)
   .route('/schedule', scheduleController)
   .route('/services', servicesController)

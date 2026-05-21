@@ -87,7 +87,37 @@
   },
   "clients": {
     "emptyTitle": "No clients yet",
-    "emptyDescription": "Clients are added automatically when they book."
+    "emptyDescription": "Clients are added automatically when they book.",
+    "searchLabel": "Search clients",
+    "searchPlaceholder": "Name or phone",
+    "searchEmptyTitle": "Nothing matched",
+    "searchEmptyDescription": "No clients match “{{query}}”.",
+    "loadMore": "Load more",
+    "row": {
+      "lastSeen": "Last visit {{date}}",
+      "noBookings": "No bookings yet",
+      "bookingCount_one": "{{count}} booking",
+      "bookingCount_other": "{{count}} bookings"
+    },
+    "errors": {
+      "loadFailed": "Couldn't load clients."
+    }
+  },
+  "clientDetail": {
+    "title": "Client",
+    "contact": "Contact",
+    "notesLabel": "Notes",
+    "notesPlaceholder": "Private notes about this client",
+    "notesHint": "Only you can see these. Saved automatically.",
+    "notesSaving": "Saving…",
+    "notesSaved": "Saved",
+    "historyTitle": "Booking history",
+    "historyEmptyTitle": "No bookings yet",
+    "historyEmptyDescription": "Bookings for this client will show here.",
+    "errors": {
+      "loadFailed": "Couldn't load this client.",
+      "saveNotesFailed": "Couldn't save the notes."
+    }
   },
   "settings": {
     "signedInAs": "Account",
