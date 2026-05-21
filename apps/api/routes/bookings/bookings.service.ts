@@ -1,23 +1,22 @@
 import { HTTPException } from 'hono/http-exception';
 import { addMinutes } from '@bookla/slots';
 import type {
+  BookingCreateDto,
   BookingResponseDto,
+  BookingSlotsQueryDto,
   BookingUpdateDto,
   BookingsListQueryDto,
 } from '@bookla/dto/bookings';
 import { getPrismaClient } from '../../db';
 import { AppError } from '../../utils/errors';
 import type { AuthUser } from '../../middleware/auth.middleware';
-
-const toDateOnlyUTC = (d: Date): Date =>
-  new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
-
-const formatDateOnly = (d: Date): string => {
-  const y = d.getUTCFullYear();
-  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(d.getUTCDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-};
+import {
+  formatDateOnly,
+  isSerializationFailure,
+  loadAvailableSlotsForStaff,
+  nowInTimezone,
+  toDateOnlyUTC,
+} from './booking-shared';
 
 const bookingInclude = {
   staff: { select: { id: true, name: true } },
@@ -70,6 +69,141 @@ const toResponse = (b: BookingWithRelations): BookingResponseDto => ({
   createdAt: b.createdAt.toISOString(),
   updatedAt: b.updatedAt.toISOString(),
 });
+
+/**
+ * Resolve the caller's tenant timezone — needed by the slot loader for past-
+ * slot filtering on "today". Cached via a single tenant lookup per request.
+ */
+const getTenantTimezone = async (tenantId: number): Promise<string> => {
+  const db = await getPrismaClient();
+  const tenant = await db.tenant.findUnique({
+    where: { id: tenantId },
+    select: { timezone: true },
+  });
+  if (!tenant) throw new HTTPException(404, { message: 'Tenant not found' });
+  return tenant.timezone;
+};
+
+export const getAvailableSlotsForStaff = async (
+  user: AuthUser,
+  query: BookingSlotsQueryDto,
+): Promise<string[]> => {
+  const db = await getPrismaClient();
+  const timezone = await getTenantTimezone(user.tenantId);
+  return loadAvailableSlotsForStaff({
+    db,
+    tenantId: user.tenantId,
+    staffId: query.staffId,
+    serviceId: query.serviceId,
+    date: query.date,
+    timezone,
+  });
+};
+
+/**
+ * Manual create (task 10). Same atomic Serializable transaction as the public
+ * flow, with two intentional differences:
+ *
+ *   1. `source = 'manual'` (the tenant is doing the work themselves).
+ *   2. **No blocklist check.** A staff member booking a banned phone via the
+ *      walk-in / phone-call path is making a conscious decision. The blocklist
+ *      is an anti-self-service guard; it shouldn't tie the tenant's hands.
+ *
+ * The serialisation-failure mapping and past-slot guard are identical.
+ */
+export const createBooking = async (
+  user: AuthUser,
+  dto: BookingCreateDto,
+): Promise<BookingResponseDto> => {
+  const db = await getPrismaClient();
+  const timezone = await getTenantTimezone(user.tenantId);
+
+  const [service, staff] = await Promise.all([
+    db.service.findFirst({
+      where: { id: dto.serviceId, tenantId: user.tenantId, isActive: true },
+      select: { id: true, durationMinutes: true },
+    }),
+    db.staff.findFirst({
+      where: { id: dto.staffId, tenantId: user.tenantId, isActive: true },
+      select: { id: true },
+    }),
+  ]);
+  if (!service || !staff) {
+    throw new HTTPException(404, { message: 'Service or staff not found' });
+  }
+
+  const date = toDateOnlyUTC(dto.date);
+  const startTime = dto.startTime;
+  const endTime = addMinutes(startTime, service.durationMinutes);
+
+  // Same guard as the public flow — don't let manual entry book a time that
+  // already passed in the business's timezone.
+  const now = nowInTimezone(timezone);
+  const dateStr = formatDateOnly(date);
+  if (dateStr < now.date || (dateStr === now.date && startTime < now.time)) {
+    throw new AppError('Cannot book a past slot', 'SLOT_IN_PAST', 400);
+  }
+
+  const attempt = async () =>
+    db.$transaction(
+      async (tx) => {
+        const conflicts = await tx.booking.count({
+          where: {
+            staffId: staff.id,
+            date,
+            status: 'confirmed',
+            NOT: {
+              OR: [{ endTime: { lte: startTime } }, { startTime: { gte: endTime } }],
+            },
+          },
+        });
+        if (conflicts > 0) {
+          throw new AppError('Slot unavailable', 'SLOT_UNAVAILABLE', 409);
+        }
+
+        const client = await tx.client.upsert({
+          where: { tenantId_phone: { tenantId: user.tenantId, phone: dto.client.phone } },
+          update: {
+            name: dto.client.name,
+            ...(dto.client.email !== undefined && { email: dto.client.email }),
+          },
+          create: {
+            tenantId: user.tenantId,
+            name: dto.client.name,
+            phone: dto.client.phone,
+            email: dto.client.email ?? null,
+          },
+        });
+
+        return tx.booking.create({
+          data: {
+            tenantId: user.tenantId,
+            staffId: staff.id,
+            serviceId: service.id,
+            clientId: client.id,
+            date,
+            startTime,
+            endTime,
+            status: 'confirmed',
+            source: 'manual',
+            notes: dto.notes ?? null,
+          },
+          include: bookingInclude,
+        });
+      },
+      { isolationLevel: 'Serializable' },
+    );
+
+  try {
+    const created = await attempt();
+    return toResponse(created);
+  } catch (err) {
+    if (isSerializationFailure(err)) {
+      throw new AppError('Slot unavailable', 'SLOT_UNAVAILABLE', 409);
+    }
+    throw err;
+  }
+};
 
 export const listBookings = async (
   user: AuthUser,
@@ -240,16 +374,3 @@ export const updateBooking = async (
   return toResponse(updated);
 };
 
-const isSerializationFailure = (err: unknown): boolean => {
-  if (!err || typeof err !== 'object') return false;
-  const e = err as {
-    code?: string;
-    message?: string;
-    cause?: { kind?: string; originalCode?: string };
-  };
-  if (e.code === 'P2034') return true;
-  if (e.cause?.kind === 'TransactionWriteConflict') return true;
-  if (e.cause?.originalCode === '40001') return true;
-  if (typeof e.message === 'string' && /could not serialize/i.test(e.message)) return true;
-  return false;
-};

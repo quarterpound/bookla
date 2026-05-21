@@ -1,10 +1,12 @@
 import { z } from 'zod';
+import { phoneValidator } from './utils';
 
 /**
- * Authenticated booking DTOs — calendar range query + per-booking PATCH.
- * The public-side counterparts live in `./public.ts`. Status enum is duplicated
- * here as a string union rather than importing `@bookla/db` so this package
- * stays runtime-free for the storefront bundle.
+ * Authenticated booking DTOs — calendar range query + per-booking PATCH + the
+ * manual-create path (task 10). The public-side counterparts live in
+ * `./public.ts`. Status enum is duplicated here as a string union rather than
+ * importing `@bookla/db` so this package stays runtime-free for the storefront
+ * bundle.
  */
 
 const timeHHMM = z
@@ -68,8 +70,42 @@ export const bookingUpdateDto = z
     { message: 'Reschedule requires both date and startTime' },
   );
 
+// Optional email mirrors the public DTO — accept empty string as "not given"
+// rather than failing email validation on a blank form field.
+const optionalEmail = z.preprocess(
+  (v) => (typeof v === 'string' && v.trim() === '' ? undefined : v),
+  z.string().trim().toLowerCase().email('Invalid email address').optional(),
+);
+
+/**
+ * Manual create — staff books a walk-in or phone-call client. Same shape as
+ * `publicBookingCreateDto` minus the `slug` (tenant comes from JWT) and
+ * deliberately skips the blocklist check on the server side (a tenant booking
+ * a banned phone manually is making a conscious decision).
+ */
+export const bookingCreateDto = z.object({
+  staffId: z.number().int().positive(),
+  serviceId: z.number().int().positive(),
+  date: z.coerce.date(),
+  startTime: timeHHMM,
+  client: z.object({
+    name: z.string().trim().min(1, 'Name is required').max(120),
+    phone: phoneValidator,
+    email: optionalEmail,
+  }),
+  notes: z.string().trim().max(500).optional(),
+});
+
+export const bookingSlotsQueryDto = z.object({
+  staffId: z.coerce.number().int().positive(),
+  serviceId: z.coerce.number().int().positive(),
+  date: z.coerce.date(),
+});
+
 export type BookingsListQueryDto = z.infer<typeof bookingsListQueryDto>;
 export type BookingUpdateDto = z.infer<typeof bookingUpdateDto>;
+export type BookingCreateDto = z.infer<typeof bookingCreateDto>;
+export type BookingSlotsQueryDto = z.infer<typeof bookingSlotsQueryDto>;
 
 export interface BookingResponseDto {
   id: number;

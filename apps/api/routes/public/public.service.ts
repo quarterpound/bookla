@@ -11,42 +11,14 @@ import type {
 } from '@bookla/dto/public';
 import { getPrismaClient } from '../../db';
 import { AppError } from '../../utils/errors';
-
-/**
- * `WorkingInterval.dayOfWeek` is 0=Mon..6=Sun (see seed.ts). JS `Date.getDay()`
- * returns 0=Sun..6=Sat, so we shift: `(jsDay + 6) % 7`.
- */
-const jsDayToWorkingDay = (jsDay: number): number => (jsDay + 6) % 7;
-
-/**
- * "Today" + "now" in the business's timezone, formatted as YYYY-MM-DD / HH:MM.
- * Uses `sv-SE` because it produces ISO-like output (`2026-05-19 14:30:00`)
- * regardless of the host locale.
- */
-const nowInTimezone = (timezone: string): { date: string; time: string } => {
-  const fmt = new Intl.DateTimeFormat('sv-SE', {
-    timeZone: timezone,
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-  // `sv-SE` returns `2026-05-19 14:30` — split on the space.
-  const parts = fmt.format(new Date()).split(' ');
-  return { date: parts[0]!, time: parts[1]! };
-};
-
-const toDateOnlyUTC = (d: Date): Date =>
-  new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
-
-const formatDateOnly = (d: Date): string => {
-  const y = d.getUTCFullYear();
-  const m = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(d.getUTCDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
-};
+import {
+  formatDateOnly,
+  isSerializationFailure,
+  jsDayToWorkingDay,
+  loadAvailableSlotsForStaff,
+  nowInTimezone,
+  toDateOnlyUTC,
+} from '../bookings/booking-shared';
 
 /** Resolve a public tenant by slug. Surfaces 404 if missing or suspended. */
 const requirePublicTenant = async (slug: string) => {
@@ -115,71 +87,14 @@ export const getPublicSlots = async (
 ): Promise<string[]> => {
   const tenant = await requirePublicTenant(slug);
   const db = await getPrismaClient();
-
-  // Service + staff must belong to this tenant *and* be active. We treat
-  // mismatches as 404 to avoid leaking other tenants' ids via probing.
-  const [service, staff] = await Promise.all([
-    db.service.findFirst({
-      where: { id: query.serviceId, tenantId: tenant.id, isActive: true },
-      select: { id: true, durationMinutes: true },
-    }),
-    db.staff.findFirst({
-      where: { id: query.staffId, tenantId: tenant.id, isActive: true },
-      select: { id: true },
-    }),
-  ]);
-  if (!service || !staff) {
-    throw new HTTPException(404, { message: 'Service or staff not found' });
-  }
-
-  const date = toDateOnlyUTC(query.date);
-  const dayOfWeek = jsDayToWorkingDay(date.getUTCDay());
-
-  // Working intervals (recurring) + days off + confirmed bookings on that date.
-  const [intervals, dayOff, bookings] = await Promise.all([
-    db.workingInterval.findMany({
-      where: { staffId: staff.id, dayOfWeek },
-      select: { startTime: true, endTime: true },
-      orderBy: { startTime: 'asc' },
-    }),
-    db.dayOff.findFirst({
-      where: { staffId: staff.id, date },
-      select: { id: true },
-    }),
-    db.booking.findMany({
-      where: { staffId: staff.id, date, status: 'confirmed' },
-      select: { startTime: true, endTime: true },
-    }),
-  ]);
-
-  if (dayOff || intervals.length === 0) return [];
-
-  const nowInBusinessTz = nowInTimezone(tenant.timezone);
-  const dateStr = formatDateOnly(date);
-  const args = {
-    date: dateStr,
-    isDayOff: false as const,
-    existingBookings: bookings,
-    serviceDurationMinutes: service.durationMinutes,
-    nowInBusinessTz,
-  };
-
-  // Engine handles a single window with an optional break. Schema allows N
-  // intervals per (staff, dayOfWeek); we run the engine per interval and
-  // concatenate — works for any N (split shifts, etc.).
-  const slots: string[] = [];
-  for (const wh of intervals) {
-    slots.push(
-      ...getAvailableSlots({
-        ...args,
-        workingHours: { startTime: wh.startTime, endTime: wh.endTime },
-      }),
-    );
-  }
-  // Defence in depth — adjacent intervals could in principle produce duplicates
-  // if someone configures overlapping rows (the schedule controller rejects
-  // those, but be safe).
-  return Array.from(new Set(slots)).sort();
+  return loadAvailableSlotsForStaff({
+    db,
+    tenantId: tenant.id,
+    staffId: query.staffId,
+    serviceId: query.serviceId,
+    date: query.date,
+    timezone: tenant.timezone,
+  });
 };
 
 /**
@@ -188,11 +103,9 @@ export const getPublicSlots = async (
  * (formatted YYYY-MM-DD). Cap the range at 60 days to keep this O(days) and
  * avoid pathological queries.
  *
- * Single set of queries — weekly intervals, days off in range, confirmed
- * bookings in range — then we iterate dates locally and run the engine per
- * day. This is the same logic `getPublicSlots` runs for a single day; we
- * don't extract a shared helper yet because task 10 will move the slot
- * wrapper to `bookings.service.ts` and we want one PR to do that cleanly.
+ * Stays inline (rather than calling `loadAvailableSlotsForStaff` per day) so
+ * we issue 3 range queries instead of N×3 single-day queries — the helper is
+ * shaped for single-date callers (public/slots + manual booking).
  */
 export const getPublicCalendar = async (
   slug: string,
@@ -432,28 +345,6 @@ export const createPublicBooking = async (
     }
     throw err;
   }
-};
-
-/**
- * Identify a Postgres SSI serialization failure (SQLSTATE 40001), which two
- * confirmed-booking races trigger on commit. Prisma 7 + `@prisma/adapter-pg`
- * surfaces it as a `DriverAdapterError` whose `cause` carries
- * `{ kind: 'TransactionWriteConflict', originalCode: '40001', ... }`. We also
- * accept the legacy `P2034` shape (older Prisma) and a textual fingerprint as
- * a last-resort fallback. Anything else propagates as an unhandled 500.
- */
-const isSerializationFailure = (err: unknown): boolean => {
-  if (!err || typeof err !== 'object') return false;
-  const e = err as {
-    code?: string;
-    message?: string;
-    cause?: { kind?: string; originalCode?: string };
-  };
-  if (e.code === 'P2034') return true;
-  if (e.cause?.kind === 'TransactionWriteConflict') return true;
-  if (e.cause?.originalCode === '40001') return true;
-  if (typeof e.message === 'string' && /could not serialize/i.test(e.message)) return true;
-  return false;
 };
 
 export const getPublicBooking = async (publicId: string): Promise<PublicBookingResponseDto> => {

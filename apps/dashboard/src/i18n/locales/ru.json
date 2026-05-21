@@ -216,8 +216,46 @@
   },
   "newBooking": {
     "title": "Новая запись",
-    "comingSoonTitle": "Скоро",
-    "comingSoonDescription": "Форма ручного создания записи появится в ближайшем обновлении."
+    "continue": "Далее",
+    "submit": "Создать запись",
+    "submitting": "Отправляем…",
+    "service": {
+      "title": "Выберите услугу",
+      "durationMinutes": "{{minutes}} мин",
+      "emptyTitle": "Нет активных услуг",
+      "emptyDescription": "Сначала добавьте хотя бы одну услугу в Настройках."
+    },
+    "date": {
+      "title": "Выберите дату"
+    },
+    "slot": {
+      "title": "Выберите время ({{minutes}} мин)",
+      "emptyTitle": "Свободного времени нет",
+      "emptyDescription": "На этот день свободных слотов нет. Попробуйте другую дату."
+    },
+    "client": {
+      "title": "Данные клиента",
+      "nameLabel": "Имя",
+      "namePlaceholder": "Имя клиента",
+      "phoneLabel": "Телефон",
+      "emailLabel": "Email (необязательно)",
+      "notesLabel": "Комментарий (необязательно)",
+      "notesPlaceholder": "Что-то полезное запомнить"
+    },
+    "summary": {
+      "service": "Услуга",
+      "date": "Дата",
+      "time": "Время"
+    },
+    "errors": {
+      "slotsLoadFailed": "Не удалось загрузить время.",
+      "slotTaken": "Это время только что заняли. Выберите другое.",
+      "slotInPast": "Это время уже прошло. Выберите другое.",
+      "invalidClient": "Проверьте имя и телефон клиента.",
+      "generic": "Не удалось создать запись. Попробуйте снова.",
+      "noStaffTitle": "Сотрудник не найден",
+      "noStaffDescription": "Сначала завершите настройку и вернитесь."
+    }
   },
   "onboarding": {
     "title": "Настройка",

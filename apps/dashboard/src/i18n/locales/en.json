@@ -212,8 +212,46 @@
   },
   "newBooking": {
     "title": "New booking",
-    "comingSoonTitle": "Coming soon",
-    "comingSoonDescription": "The manual booking flow lands in the next update."
+    "continue": "Continue",
+    "submit": "Create booking",
+    "submitting": "Sending…",
+    "service": {
+      "title": "Pick a service",
+      "durationMinutes": "{{minutes}} min",
+      "emptyTitle": "No active services",
+      "emptyDescription": "Add at least one service in Settings first."
+    },
+    "date": {
+      "title": "Pick a date"
+    },
+    "slot": {
+      "title": "Pick a time ({{minutes}} min)",
+      "emptyTitle": "No times available",
+      "emptyDescription": "No slots free on this day. Try another date."
+    },
+    "client": {
+      "title": "Client details",
+      "nameLabel": "Name",
+      "namePlaceholder": "Client name",
+      "phoneLabel": "Phone",
+      "emailLabel": "Email (optional)",
+      "notesLabel": "Notes (optional)",
+      "notesPlaceholder": "Anything you should remember"
+    },
+    "summary": {
+      "service": "Service",
+      "date": "Date",
+      "time": "Time"
+    },
+    "errors": {
+      "slotsLoadFailed": "Couldn't load times.",
+      "slotTaken": "That time was just taken. Pick another.",
+      "slotInPast": "That time has already passed. Pick another.",
+      "invalidClient": "Check the client name and phone.",
+      "generic": "Couldn't create the booking. Try again.",
+      "noStaffTitle": "No staff found",
+      "noStaffDescription": "Finish onboarding first, then come back."
+    }
   },
   "onboarding": {
     "title": "Set up",

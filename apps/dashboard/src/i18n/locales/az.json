@@ -212,8 +212,46 @@
   },
   "newBooking": {
     "title": "Yeni rezerv",
-    "comingSoonTitle": "Tezliklə",
-    "comingSoonDescription": "Manuel rezerv əlavə etmək formu növbəti yeniləmədə hazır olacaq."
+    "continue": "Davam et",
+    "submit": "Rezervi yarat",
+    "submitting": "Göndərilir…",
+    "service": {
+      "title": "Xidmət seçin",
+      "durationMinutes": "{{minutes}} dəq",
+      "emptyTitle": "Aktiv xidmət yoxdur",
+      "emptyDescription": "Əvvəlcə Ayarlardan ən azı bir xidmət əlavə edin."
+    },
+    "date": {
+      "title": "Tarix seçin"
+    },
+    "slot": {
+      "title": "Vaxt seçin ({{minutes}} dəq)",
+      "emptyTitle": "Boş vaxt yoxdur",
+      "emptyDescription": "Bu gün üçün boş vaxt yoxdur. Başqa tarix seçin."
+    },
+    "client": {
+      "title": "Müştəri məlumatları",
+      "nameLabel": "Ad",
+      "namePlaceholder": "Müştərinin adı",
+      "phoneLabel": "Telefon",
+      "emailLabel": "E-poçt (istəyə bağlı)",
+      "notesLabel": "Qeyd (istəyə bağlı)",
+      "notesPlaceholder": "Qısa qeyd"
+    },
+    "summary": {
+      "service": "Xidmət",
+      "date": "Tarix",
+      "time": "Vaxt"
+    },
+    "errors": {
+      "slotsLoadFailed": "Vaxtları yükləmək alınmadı.",
+      "slotTaken": "Bu vaxt artıq tutuldu. Başqa vaxt seçin.",
+      "slotInPast": "Bu vaxt artıq keçib. Başqa vaxt seçin.",
+      "invalidClient": "Müştəri adını və telefonunu yoxlayın.",
+      "generic": "Rezervi yaratmaq alınmadı. Yenidən cəhd edin.",
+      "noStaffTitle": "İşçi tapılmadı",
+      "noStaffDescription": "Quraşdırmanı tamamladıqdan sonra yenidən cəhd edin."
+    }
   },
   "onboarding": {
     "title": "Quraşdırma",
